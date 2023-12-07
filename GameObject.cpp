@@ -16,6 +16,10 @@ void GameObject::onKeyPressed(unsigned char key, int mouseX, int mouseY) {}
 
 void GameObject::onSpecialKeyPressed(int key, int mouseX, int mouseY) {}
 
+void GameObject::onMouse(int button, int state, int x, int y)
+{
+}
+
 void GameObject::onIdle() {
     if (targetPosition != position) {
         Vector3f translation = targetPosition - position;

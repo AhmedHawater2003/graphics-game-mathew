@@ -1,7 +1,7 @@
 #include "AnimatingValue.h"
 
-AnimatingValue::AnimatingValue(float value, float max, float speed, bool twoWay, bool repeating)
-        : value(value), max(max), speed(speed), twoWay(twoWay), repeating(repeating) {}
+AnimatingValue::AnimatingValue(float value, float max, float speed)
+        : value(value), max(max), speed(speed) {}
 
 void AnimatingValue::animate() {
     if (animating) {
@@ -9,18 +9,31 @@ void AnimatingValue::animate() {
 
         if (value >= max) {
             value = max;
-            if (repeating) {
+            if (repeating || twoWay) {
                 direction = -1;
+            }
+            else {
+                animating = false;
             }
         } else {
             if (twoWay) {
                 if (value <= -max) {
-                    direction = 1;
+                    if (repeating) {
+                        direction = 1;
+                    }
+                    else {
+                        animating = false;
+                    }
                 }
             } else {
                 if (value <= 0) {
                     value = 0;
-                    direction = 1;
+                    if (repeating) {
+                        direction = 1;
+                    }
+                    else {
+                        animating = false;
+                    }
                 }
             }
         }
@@ -41,4 +54,16 @@ void AnimatingValue::toggle() {
 
 double AnimatingValue::getValue() {
     return value;
+}
+
+AnimatingValue* AnimatingValue::setTwoWay(bool twoWay)
+{
+    this->twoWay = twoWay;
+	return this;
+}
+
+AnimatingValue* AnimatingValue::setRepeating(bool repeating)
+{
+    this->repeating = repeating;
+	return this;
 }

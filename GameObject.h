@@ -30,6 +30,8 @@ public:
 
     virtual void onSpecialKeyPressed(int key, int mouseX, int mouseY);
 
+    virtual void onMouse(int button, int state, int x, int y);
+
     virtual void onIdle();
 
     [[nodiscard]] const Vector3f &getAngle() const;

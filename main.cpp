@@ -7,6 +7,7 @@
 GameSettings *gameSettings = GameSettingsBuilder()
         .setWindowWidth(1024)
         .setWindowHeight(1024)
+        .setShowCollisionBoxes(true)
         .build();
 
 Game *game = Game::getInstance(gameSettings);
@@ -34,6 +35,10 @@ int main(int argc, char **argv) {
     glutIdleFunc([]() {
         game->onIdle();
     });
+
+    glutMouseFunc([](int button, int state, int x, int y) {
+		game->onMouse(button, state, x, y);
+	});
 
     timer(0);
 

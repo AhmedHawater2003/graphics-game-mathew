@@ -29,6 +29,12 @@ void Game::onSpecialKeyPressed(int key, int mouseX, int mouseY) {
     glutPostRedisplay();
 }
 
+void Game::onMouse(int button, int state, int x, int y)
+{
+    scene->onMouse(button, state, x, y);
+	glutPostRedisplay();
+}
+
 void Game::init(int argc, char **argv, GameScene *initialScene) {
     glutInit(&argc, argv);
 

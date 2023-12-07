@@ -94,6 +94,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GLTexture.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="OpenGLMeshLoader.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="glew.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="glut.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TextureBuilder.h" />

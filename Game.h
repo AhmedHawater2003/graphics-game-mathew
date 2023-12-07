@@ -25,6 +25,8 @@ public:
 
     void onSpecialKeyPressed(int key, int mouseX, int mouseY);
 
+    void onMouse(int button, int state, int x, int y);
+
     void init(int argc, char **argv, GameScene *initialScene);
 
     void onIdle();

@@ -109,6 +109,13 @@ void GameScene::onSpecialKeyPressed(int key, int mouseX, int mouseY) {
     }
 }
 
+void GameScene::onMouse(int button, int state, int x, int y)
+{
+    for (auto &[_, gameObject]: gameObjects) {
+		gameObject->onMouse(button, state, x, y);
+	}
+}
+
 void GameScene::onIdle() {
     for (auto &[_, gameObject]: gameObjects) {
         gameObject->onIdle();

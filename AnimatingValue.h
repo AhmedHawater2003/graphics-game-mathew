@@ -8,11 +8,11 @@ class AnimatingValue {
     float speed;
     float direction = 1;
     bool animating = false;
-    bool twoWay;
-    bool repeating;
+    bool twoWay = false;
+    bool repeating = true;
 
 public:
-    AnimatingValue(float value, float max, float speed, bool twoWay = false, bool repeating = true);
+    AnimatingValue(float value, float max, float speed);
 
     void animate();
 
@@ -23,6 +23,10 @@ public:
     void toggle();
 
     double getValue();
+
+    AnimatingValue *setTwoWay(bool twoWay);
+
+    AnimatingValue *setRepeating(bool repeating);
 };
 
 
