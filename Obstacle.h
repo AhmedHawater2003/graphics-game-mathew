@@ -3,6 +3,8 @@
 class Obstacle :
     public GameObject
 {
+public:
+    Obstacle();
     void draw();
 };
 

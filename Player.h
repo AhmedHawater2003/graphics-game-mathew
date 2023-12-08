@@ -8,8 +8,8 @@ class Player : public GameObject
 	Model_3DS model_player;
 	bool shouldMoveUp = false;
 	bool shouldMoveDown = false;
-
 	bool shouldMoveForward = true;
+	bool playCrashAnimation = false;
 public:
 	Player();
 	void init();
@@ -17,5 +17,6 @@ public:
 	void onIdle();
 	void onSpecialKeyPressed(int key, int x, int y);
 	void onMouse(int button, int state, int x, int y);
+	void onCollision(GameObject*& pObject);
 };
 

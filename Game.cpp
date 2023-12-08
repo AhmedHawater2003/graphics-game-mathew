@@ -93,6 +93,16 @@ void Game::incrementScore() {
     score++;
 }
 
+void Game::setGameOver(bool newGameOver)
+{
+    gameOver = newGameOver;
+}
+
+bool Game::isGameOver()
+{
+    return gameOver;
+}
+
 
 
 

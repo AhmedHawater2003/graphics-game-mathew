@@ -13,6 +13,8 @@ class Game {
     GameSettings *gameSettings;
     static Game *instance;
 
+    bool gameOver = false;
+
     explicit Game(GameSettings *gameSettings);
 
 public:
@@ -42,6 +44,10 @@ public:
     int getScore();
 
     void incrementScore();
+
+    void setGameOver(bool gameOver);
+
+    bool isGameOver();
 };
 
 

@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "glut.h"
 #include <Windows.h>
+#include "Obstacle.h"
+#include "Collectable.h"
+#include "Goal.h"
 
 Player::Player()
 	: GameObject({ 3, 1, 3 })
@@ -22,6 +25,18 @@ void Player::draw()
 
 void Player::onIdle()
 {
+	if (playCrashAnimation) {
+		if (getPosition().getY() < 5) {
+			Game::getInstance()->setGameOver(true);
+		}
+		else {
+			moveBy({ 0, -0.1, 0 });
+			rotateBy({ 0, 2, 0 });
+		}
+
+		return;
+	}
+
 	if (shouldMoveForward) {
 		moveBy({ 0, -0.01, 0.2 });
 	}
@@ -126,5 +141,24 @@ void Player::onMouse(int button, int state, int x, int y)
 		else {
 			PlaySound(NULL, NULL, SND_ASYNC);
 		}
+	}
+}
+
+void Player::onCollision(GameObject*& pObject)
+{
+	Obstacle *obstacle = dynamic_cast<Obstacle*>(pObject);
+	if (obstacle != nullptr && !playCrashAnimation) {
+		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
+		playCrashAnimation = true;
+	}
+
+	Collectable *collectable = dynamic_cast<Collectable*>(pObject);
+	if (collectable != nullptr) {
+		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
+	}
+	
+	Goal *goal = dynamic_cast<Goal*>(pObject);
+	if (goal != nullptr) {
+		PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
 	}
 }
