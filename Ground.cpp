@@ -1,6 +1,7 @@
 #include "Ground.h"
+#include "glut.h"
 
-Ground::Ground() : GameObject({ 20, 1, 200 }) {}
+Ground::Ground() : GameObject({ 40, 1, 800 }) {}
 
 void Ground::init()
 {
@@ -19,13 +20,13 @@ void Ground::draw()
 	glBegin(GL_QUADS);
 	glNormal3f(0, 1, 0);
 	glTexCoord2f(0, 0);
-	glVertex3f(-10, 0, -100);
+	glVertex3f(-20, 0, -400);
 	glTexCoord2f(1, 0);
-	glVertex3f(10, 0, -100);
+	glVertex3f(20, 0, -400);
 	glTexCoord2f(1, 10);
-	glVertex3f(10, 0, 100);
+	glVertex3f(20, 0, 400);
 	glTexCoord2f(0, 10);
-	glVertex3f(-10, 0, 100);
+	glVertex3f(-20, 0, 400);
 	glEnd();
 	glPopMatrix();
 }

@@ -9,7 +9,7 @@ Game::Game(GameSettings *gameSettings) : gameSettings(gameSettings) {
 
 void Game::draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //scene->setupLights();
+    scene->setupLights();
     scene->draw();
     glutSwapBuffers();
 }
@@ -44,15 +44,10 @@ void Game::init(int argc, char **argv, GameScene *initialScene) {
 
     glutCreateWindow("Game 6");
 
-    glClearColor(127.0 / 255.0, 207.0 / 255.0, 255.0 / 255.0, 0.0f);
     setScene(initialScene);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    glEnable(GL_LIGHT2);
-    glEnable(GL_LIGHT3);
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
 }
