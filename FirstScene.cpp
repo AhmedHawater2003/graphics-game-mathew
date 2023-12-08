@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Ground.h"
 #include "Obstacle.h"
+#include "Skybox.h"
 #include <glut.h>
 
 FirstScene::FirstScene()
@@ -24,6 +25,9 @@ FirstScene::FirstScene()
 		->setPosition({ 0, 5, 20 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
+
+
+	gameObjects["skybox"] = (new Skybox);
 }
 
 void FirstScene::onIdle()

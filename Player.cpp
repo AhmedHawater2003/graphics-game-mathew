@@ -21,14 +21,14 @@ void Player::draw()
 
 void Player::onIdle()
 {
-	moveBy({ 0, -0.01, 0.1 });
+	moveBy({ 0, -0.01, 0.2 });
 
 	if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
 		if (getAngle().getZ() > 0) {
-			rotateBy({ 0, 0, -0.15 });
+			rotateBy({ 0, 0, -0.6 });
 		}
 		else {
-			rotateBy({ 0, 0, 0.15 });
+			rotateBy({ 0, 0, 0.6 });
 		}
 	}
 	else {
@@ -37,7 +37,7 @@ void Player::onIdle()
 	
 
 	if (getAngle().getX() < -1) {
-		rotateBy({ 0.15, 0, 0 });
+		rotateBy({ 0.3, 0, 0 });
 	}
 	else {
 		setAngle({ 0, getAngle().getY(), getAngle().getZ() });
@@ -66,7 +66,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 	{
 	case GLUT_KEY_LEFT:
 		if (getPosition().getX() < 50) {
-			moveBy({ 0.025, 0, 0 });
+			moveBy({ 0.1, 0, 0 });
 			if (getAngle().getZ() > -30) {
 				rotateBy({ 0, 0, -2 });
 			}
@@ -75,7 +75,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 
 	case GLUT_KEY_RIGHT:
 		if (getPosition().getX() > -50) {
-			moveBy({ -0.025, 0, 0 });
+			moveBy({ -0.1, 0, 0 });
 			if (getAngle().getZ() < 30) {
 				rotateBy({ 0, 0, 2 });
 			}

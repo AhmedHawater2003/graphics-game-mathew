@@ -3,5 +3,7 @@
 
 void Obstacle::draw()
 {
+	glPushMatrix();
 	glutSolidCube(10);
+	glPopMatrix();
 }
