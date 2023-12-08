@@ -84,6 +84,15 @@ GameScene *Game::getScene() const {
     return scene;
 }
 
+int Game::getScore()
+{
+    return score;
+}
+
+void Game::incrementScore() {
+    score++;
+}
+
 
 
 

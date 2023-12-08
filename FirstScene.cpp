@@ -4,6 +4,7 @@
 #include "Ground.h"
 #include "Obstacle.h"
 #include "Skybox.h"
+#include "GameText.h"
 #include <glut.h>
 
 FirstScene::FirstScene()
@@ -28,6 +29,8 @@ FirstScene::FirstScene()
 
 
 	gameObjects["skybox"] = (new Skybox);
+
+	gameObjects["gameText"] = (new GameText);
 }
 
 void FirstScene::onIdle()
@@ -35,7 +38,8 @@ void FirstScene::onIdle()
 	GameScene::onIdle();
 
 	Player *player = getGameObjectByTag<Player>("player");
-	Camera *camera = getGameObjectByTag<Camera>("camera");
+	Camera* camera = getGameObjectByTag<Camera>("camera");
+	GameText* gameText = getGameObjectByTag<GameText>("gameText");
 
 	if (is3rdPerson) {
 		camera->setCenter(player->getPosition() + Vector3f(0, 0, 5));
@@ -45,6 +49,9 @@ void FirstScene::onIdle()
 		camera->setCenter(player->getPosition() + Vector3f(0, 5, 5));
 		camera->setEye(player->getPosition() + Vector3f(0, 5, 2));
 	}
+
+	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
+	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
 }
 
 

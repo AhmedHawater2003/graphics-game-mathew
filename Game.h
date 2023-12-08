@@ -38,6 +38,10 @@ public:
     static Game *getInstance(GameSettings *settings = nullptr);
 
     [[nodiscard]] GameScene *getScene() const;
+
+    int getScore();
+
+    void incrementScore();
 };
 
 

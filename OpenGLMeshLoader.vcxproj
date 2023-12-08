@@ -92,6 +92,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameText.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameText.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="glew.h" />
     <ClInclude Include="GLTexture.h" />
@@ -124,6 +126,9 @@
     <ClInclude Include="TextureBuilder.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector3f.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\plane-elevate.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,7 +13,7 @@ void Skybox::draw()
 	GLUquadricObj* qobj;
 	qobj = gluNewQuadric();
 	glTranslated(50, 0, 0);
-	glRotated(90, 1, 0, 1);
+	glRotated(-90, 1, 0, 1);
 	glBindTexture(GL_TEXTURE_2D, tex.texture[0]);
 	gluQuadricTexture(qobj, true);
 	gluQuadricNormals(qobj, GL_SMOOTH);
