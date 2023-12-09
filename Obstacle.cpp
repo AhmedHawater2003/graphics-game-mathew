@@ -3,7 +3,7 @@
 #include "glut.h"
 
 Obstacle::Obstacle(bool isFirstScene)
-	: GameObject({ 4, 4, 4 }),
+	: GameObject({ 6, 50, 6 }),
 	  isFirstScene(isFirstScene)
 {
 }
@@ -23,6 +23,9 @@ void Obstacle::init()
 void Obstacle::draw()
 {
 	glPushMatrix();
+	if (!isFirstScene) {
+		glScaled(70, 70, 70);
+	}
 	model_obstacle.Draw();
 	glPopMatrix();
 }
