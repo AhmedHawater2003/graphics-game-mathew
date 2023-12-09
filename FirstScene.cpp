@@ -22,23 +22,23 @@ FirstScene::FirstScene()
 
 	gameObjects["gameText"] = (new GameText);
 
-	gameObjects["obstacle1"] = (new Obstacle(scene))
+	gameObjects["obstacle1"] = (new Obstacle(true))
 		->setPosition({ 0, 0, -70 });
-	gameObjects["obstacle2"] = (new Obstacle(scene))
+	gameObjects["obstacle2"] = (new Obstacle(true))
 		->setPosition({ -5, 0, -50 });
-	gameObjects["obstacle3"] = (new Obstacle(scene))
+	gameObjects["obstacle3"] = (new Obstacle(true))
 		->setPosition({ 6, 0, -30 });
 
-	gameObjects["obstacle4"] = (new Obstacle(scene))
+	gameObjects["obstacle4"] = (new Obstacle(true))
 		->setPosition({ 0, 0, -5 });
 
-	gameObjects["obstacle5"] = (new Obstacle(scene))
+	gameObjects["obstacle5"] = (new Obstacle(true))
 		->setPosition({ -5, 0, 20 });
 
-	gameObjects["obstacle6"] = (new Obstacle(scene))
+	gameObjects["obstacle6"] = (new Obstacle(true))
 		->setPosition({ 7, 0, 40 });
 	
-	gameObjects["obstacle7"] = (new Obstacle(scene))
+	gameObjects["obstacle7"] = (new Obstacle(true))
 		->setPosition({ -6, 0, 60 });
 	
 	

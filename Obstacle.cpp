@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include "glut.h"
 
-Obstacle::Obstacle()
-	: GameObject({ 4, 4, 4 })
+Obstacle::Obstacle(bool isFirstScene)
+	: GameObject({ 4, 4, 4 }),
+	  isFirstScene(isFirstScene)
 {
 }
 
-void Obstacle::init(bool scene)
+void Obstacle::init()
 {
-	if (scene == false)
+	if (isFirstScene == false)
 	{
 		model_obstacle.Load("Models/building/buildnig-1.3DS");
 	}
@@ -22,6 +23,6 @@ void Obstacle::init(bool scene)
 void Obstacle::draw()
 {
 	glPushMatrix();
-	glutSolidCube(10);
+	model_obstacle.Draw();
 	glPopMatrix();
 }

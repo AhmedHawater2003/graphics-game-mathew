@@ -4,10 +4,11 @@
 
 class Obstacle : public GameObject
 {
+	bool isFirstScene;
 	Model_3DS model_obstacle;
 public:
-	Obstacle();
-	void init(bool scene);
+	Obstacle(bool isFirstScene);
+	void init();
 	void draw();
 };
 
