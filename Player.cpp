@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <stdlib.h>
 #include "glut.h"
+#include <Windows.h>
 
 Player::Player()
 	: GameObject({ 3, 1, 3 })
@@ -21,26 +22,61 @@ void Player::draw()
 
 void Player::onIdle()
 {
-	moveBy({ 0, -0.01, 0.1 });
-
-	if (getAngle().getY() >= 0.1 || getAngle().getY() <= -0.1) {
-		if (getAngle().getY() > 0) {
-			rotateBy({ 0, -0.15, 0 });
+	if (shouldMoveForward) {
+		moveBy({ 0, -0.01, 0.2 });
+	}
+	
+	if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
+		if (getAngle().getZ() > 0) {
+			rotateBy({ 0, 0, -0.6 });
 		}
 		else {
-			rotateBy({ 0, 0.15, 0 });
+			rotateBy({ 0, 0, 0.6 });
 		}
 	}
 	else {
-		setAngle({ getAngle().getX(), 0, getAngle().getZ()});
+		setAngle({ getAngle().getX(), getAngle().getY(), 0});
 	}
+	
 
 	if (getAngle().getX() < -1) {
-		rotateBy({ 0.15, 0, 0 });
+		rotateBy({ 0.3, 0, 0 });
 	}
 	else {
 		setAngle({ 0, getAngle().getY(), getAngle().getZ() });
 	}
+
+	if (shouldMoveUp) {
+		if (getPosition().getY() < 100) {
+			moveBy({ 0, 0.05, 0 });
+		}
+		if (getAngle().getX() > -30) {
+			rotateBy({ -1.5, 0, 0 });
+		}
+	} 
+
+	if (shouldMoveDown) {
+		moveBy({ 0, -0.1, 0 });
+		if (getAngle().getX() > 30) {
+			rotateBy({ 2, 0, 0 });
+		}
+	}
+	
+	if (!shouldMoveUp && ! shouldMoveDown) {
+		if (getAngle().getX() < -1 || getAngle().getX() > 1) {
+			if (getAngle().getX() > 0) {
+				rotateBy({ -0.4, 0, 0 });
+			}
+			else {
+				rotateBy({ 0.4, 0, 0 });
+			}
+		}
+		else {
+			setAngle({ 0, getAngle().getY(), getAngle().getZ() });
+		}
+	}
+
+
 }
 
 void Player::onSpecialKeyPressed(int key, int x, int y)
@@ -48,15 +84,22 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-		moveBy({ 0.1, 0, 0 });
-		rotateBy({ 0, 1, 0 });
+		if (getPosition().getX() < 18) {
+			moveBy({ 0.1, 0, 0 });
+		}
+		if (getAngle().getZ() > -30) {
+			rotateBy({ 0, 0, -2 });
+		}
 		break;
 
 	case GLUT_KEY_RIGHT:
-		moveBy({ -0.1, 0, 0 });
-		rotateBy({ 0, -1, 0 });
+		if (getPosition().getX() > -18) {
+			moveBy({ -0.1, 0, 0 });
+		}
+		if (getAngle().getZ() < 30) {
+			rotateBy({ 0, 0, 2 });
+		}
 		break;
-
 	default:
 		break;
 	}
@@ -64,6 +107,24 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 
 void Player::onMouse(int button, int state, int x, int y)
 {
-	moveBy({ 0, 0.1, 0 });
-	rotateBy({ -5, 0, 0 });
+	if (button == GLUT_LEFT_BUTTON) {
+		shouldMoveUp = state == GLUT_DOWN;
+
+		if (shouldMoveUp) {
+			PlaySound("Sounds/plane-elevate.wav", NULL, SND_ASYNC | SND_FILENAME);
+		}
+		else {
+			PlaySound(NULL, NULL, SND_ASYNC);
+		}
+	}
+	else if (button == GLUT_RIGHT_BUTTON) {
+		shouldMoveDown = state == GLUT_DOWN;
+
+		if (shouldMoveDown) {
+			PlaySound("Sounds/plane-elevate.wav", NULL, SND_ASYNC | SND_FILENAME);
+		}
+		else {
+			PlaySound(NULL, NULL, SND_ASYNC);
+		}
+	}
 }
