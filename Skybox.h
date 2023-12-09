@@ -5,8 +5,10 @@
 class Skybox :
     public GameObject
 {
+    bool isFirstScene;
     GLTexture tex;
 public:
+    Skybox(bool isFirstScene);
     void init();
     void draw();
 };

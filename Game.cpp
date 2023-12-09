@@ -93,6 +93,37 @@ void Game::incrementScore() {
     score++;
 }
 
+void Game::setGameOver(bool newGameOver)
+{
+    gameOver = newGameOver;
+}
+
+bool Game::isGameOver()
+{
+    return gameOver;
+}
+
+
+void Game::setGameWin(bool newGameWin)
+{
+    gameWin = newGameWin;
+}
+
+bool Game::isGameWin()
+{
+    return gameWin;
+}
+
+
+void Game::setIsFirstScene(bool newIsFirstScene)
+{
+    isFirstScene = newIsFirstScene;
+}
+
+bool Game::isIsFirstScene()
+{
+    return isFirstScene;
+}
 
 
 

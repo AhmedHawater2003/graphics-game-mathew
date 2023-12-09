@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include "glut.h"
 #include <Windows.h>
+#include "Obstacle.h"
+#include "Collectable.h"
+#include "Ground.h"
+#include "Goal.h"
+#include "SecondScene.h"
+
 
 Player::Player()
 	: GameObject({ 3, 1, 3 })
@@ -16,12 +22,33 @@ void Player::init()
 void Player::draw()
 {
 	glPushMatrix();
+	double scale = collectAnimation - collectAnimation * collectAnimation;
+	glScaled(1 + 2 * scale, 1 + 2 * scale, 1 + 2 * scale);
 	model_player.Draw();
 	glPopMatrix();
 }
 
 void Player::onIdle()
 {
+	if (playCrashAnimation || playGroundCrash) {
+		Game::getInstance()->setGameOver(true);
+
+		if (getPosition().getY() >= 5) {
+			moveBy({ 0, -0.1, 0 });
+			rotateBy({ 0, 2, 0 });
+		}
+
+		return;
+	}
+
+	if (playCollectAnimation) {
+		collectAnimation += 0.01;
+		if (collectAnimation >= 1) {
+			collectAnimation = 0;
+			playCollectAnimation = false;
+		}
+	}
+
 	if (shouldMoveForward) {
 		moveBy({ 0, -0.01, 0.2 });
 	}
@@ -81,6 +108,8 @@ void Player::onIdle()
 
 void Player::onSpecialKeyPressed(int key, int x, int y)
 {
+	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
@@ -107,6 +136,8 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 
 void Player::onMouse(int button, int state, int x, int y)
 {
+	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+
 	if (button == GLUT_LEFT_BUTTON) {
 		shouldMoveUp = state == GLUT_DOWN;
 
@@ -126,5 +157,41 @@ void Player::onMouse(int button, int state, int x, int y)
 		else {
 			PlaySound(NULL, NULL, SND_ASYNC);
 		}
+	}
+}
+
+void Player::onCollision(GameObject*& pObject)
+{
+	Obstacle *obstacle = dynamic_cast<Obstacle*>(pObject);
+	if (obstacle != nullptr && !playCrashAnimation) {
+		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
+		playCrashAnimation = true;
+	}
+
+	Collectable *collectable = dynamic_cast<Collectable*>(pObject);
+	if (collectable != nullptr && !playCollectAnimation) {
+		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
+		playCollectAnimation = true;
+		collectable->setShowing(false);
+	}
+	
+	Goal *goal = dynamic_cast<Goal*>(pObject);
+	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
+		shouldMoveForward = false;
+		PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
+
+		if (Game::getInstance()->isIsFirstScene()) {
+			Game::getInstance()->setIsFirstScene(false);
+			Game::getInstance()->setScene(new SecondScene());
+		}
+		else {
+			Game::getInstance()->setGameWin(true);
+		}
+	}
+
+	Ground* ground = dynamic_cast<Ground*>(pObject);
+	if (ground != nullptr && !playCrashAnimation) {
+		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
+		playCrashAnimation = true;
 	}
 }

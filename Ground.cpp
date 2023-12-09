@@ -1,11 +1,17 @@
 #include "Ground.h"
 #include "glut.h"
 
-Ground::Ground() : GameObject({ 40, 1, 800 }) {}
+Ground::Ground(bool isFirstScene) 
+	: GameObject({ 40, 1, 800 }), isFirstScene(isFirstScene) {}
 
 void Ground::init()
 {
-	texture.Load("Textures/asphalt-texture-close-up.bmp");
+	if (isFirstScene) {
+		texture.Load("Textures/asphalt-texture-close-up.bmp");
+	}
+	else {
+		texture.Load("Textures/close-up-mixture-clay-powder.bmp");
+	}
 }
 
 void Ground::draw()

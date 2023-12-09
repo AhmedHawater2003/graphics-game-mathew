@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatingValue.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="FirstScene.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -95,12 +96,14 @@
     <ClCompile Include="GameText.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GLTexture.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OpenGLMeshLoader.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SecondScene.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector3f.cpp" />
@@ -108,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatingValue.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collectable.h" />
     <ClInclude Include="CollisionBox.h" />
     <ClInclude Include="FirstScene.h" />
     <ClInclude Include="Game.h" />
@@ -118,10 +122,12 @@
     <ClInclude Include="glew.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="glut.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SecondScene.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="TextureBuilder.h" />
     <ClInclude Include="utils.h" />

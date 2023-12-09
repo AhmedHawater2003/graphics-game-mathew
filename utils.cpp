@@ -34,10 +34,12 @@ void cylinder(double radius, double height) {
 
 void drawText(const std::string &text, int x, int y, int c) {
     glDisable(GL_LIGHTING);
+    glPushAttrib(GL_CURRENT_BIT);
     color(c);
     glRasterPos2d(0, 0);
     for (char i: text) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, i);
     }
+    glPopAttrib();
     glEnable(GL_LIGHTING);
 }

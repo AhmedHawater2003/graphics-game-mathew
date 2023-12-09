@@ -13,6 +13,10 @@ class Game {
     GameSettings *gameSettings;
     static Game *instance;
 
+    bool gameOver = false;
+    bool gameWin = false;
+    bool isFirstScene = true;
+
     explicit Game(GameSettings *gameSettings);
 
 public:
@@ -42,6 +46,18 @@ public:
     int getScore();
 
     void incrementScore();
+
+    void setGameOver(bool gameOver);
+
+    bool isGameOver();
+
+    void setGameWin(bool newGameWin);
+
+    bool isGameWin();
+
+    void setIsFirstScene(bool newIsFirstScene);
+
+    bool isIsFirstScene();
 };
 
 

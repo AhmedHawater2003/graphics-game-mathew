@@ -4,9 +4,10 @@
 
 class Ground : public GameObject
 {
+	bool isFirstScene;
 	GLTexture texture;
 public:
-	Ground();
+	Ground(bool isFirstScene);
 
 	void init();
 	void draw();

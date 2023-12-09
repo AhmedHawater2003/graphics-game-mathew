@@ -1,0 +1,3 @@
+﻿  Player.cpp
+AnimatingValue.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  OpenGLMeshLoader.vcxproj -> C:\Users\mathe\Downloads\GraphicsProject\Debug\OpenGLMeshLoader19.exe
