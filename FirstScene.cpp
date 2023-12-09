@@ -7,9 +7,6 @@
 #include "GameText.h"
 #include <glut.h>
 
-const int zMin = -100, zMax = 100;
-const int xMin = -10, xMax = 10;
-const int yPosition = 0; 
 
 FirstScene::FirstScene()
 {
@@ -18,17 +15,6 @@ FirstScene::FirstScene()
 
 	gameObjects["ground"] = (new Ground());
 
-	gameObjects["obstacle1"] = (new Obstacle)
-		->setPosition({ 0, 5, 70 });
-	gameObjects["obstacle2"] = (new Obstacle)
-		->setPosition({ 0, 5, 60 });
-	gameObjects["obstacle3"] = (new Obstacle)
-		->setPosition({ 0, 5, 40 });
-	gameObjects["obstacle4"] = (new Obstacle)
-		->setPosition({ 0, 5, 10 });
-	gameObjects["obstacle5"] = (new Obstacle)
-		->setPosition({ 0, 5, 20 });
-
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
 
@@ -36,21 +22,25 @@ FirstScene::FirstScene()
 
 	gameObjects["gameText"] = (new GameText);
 
+	gameObjects["obstacle1"] = (new Obstacle(scene))
+		->setPosition({ 0, 0, -70 });
+	gameObjects["obstacle2"] = (new Obstacle(scene))
+		->setPosition({ -5, 0, -50 });
+	gameObjects["obstacle3"] = (new Obstacle(scene))
+		->setPosition({ 6, 0, -30 });
 
-    for (int i = 0; i < 7; i++) {
+	gameObjects["obstacle4"] = (new Obstacle(scene))
+		->setPosition({ 0, 0, -5 });
 
-        float xPosition = xMin + (xMax - xMin) / 6 * i;
-        float zPosition = zMin + (zMax - zMin) / 6 * i;
+	gameObjects["obstacle5"] = (new Obstacle(scene))
+		->setPosition({ -5, 0, 20 });
 
-        gameObjects["obstacle" + std::to_string(i)] = (new Obstacle())
-            ->setPosition({
-                xPosition, 
-                yPosition,
-                zPosition 
-            });
-    }
-
-
+	gameObjects["obstacle6"] = (new Obstacle(scene))
+		->setPosition({ 7, 0, 40 });
+	
+	gameObjects["obstacle7"] = (new Obstacle(scene))
+		->setPosition({ -6, 0, 60 });
+	
 	
 }
 
@@ -97,5 +87,63 @@ void FirstScene::setupLights()
 	double p = hourOfDay / 48;
 	
 	//glClearColor(127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f);
+
+	GLfloat light_position[] = { 0.0, 100.0, 0.0, 1.0 };
+	GLfloat light_ambient[] = { p, p, p, 0 };
+	GLfloat light_diffuse[] = { 127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f };
+	GLfloat light_specular[] = { p, p, p, 0.0f };
+	GLfloat shininess[] = { 0.5 };
+
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SHININESS, shininess);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+	glEnable(GL_LIGHT0);
+
+
+	Player* player = getGameObjectByTag<Player>("player");
+
+	// Spotlight
+	GLfloat light_position1[] = {
+		player->getPosition().getX(),
+		player->getPosition().getY() + 25,
+		player->getPosition().getZ() + 20,
+		1.0};
+	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
+	GLfloat light_diffuse1[] = { 242.0 / 255.0, 235.0 / 255.0, 104.0 / 255.0, 0.0 }; // Increase diffuse intensity
+	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
+
+	GLfloat spot_direction[] = { 0.0, -2.0, 1 };
+
+	// Set spotlight properties
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient1);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
+	glLightfv(GL_LIGHT1, GL_SHININESS, shininess);
+
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
+
+	// Enable lighting and light1
+	glEnable(GL_LIGHT1);
+}
+
+void FirstScene::onTimer(int value)
+{
+	GameScene::onTimer(value);
+
+	hourOfDay += timeDirection;
+	if (hourOfDay == 24) {
+		timeDirection = -1;
+	}
+	else if (hourOfDay == 0) {
+		timeDirection = 1;
+	}
+}
+
 
 

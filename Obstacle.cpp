@@ -7,9 +7,16 @@ Obstacle::Obstacle()
 {
 }
 
-void Obstacle::init()
+void Obstacle::init(bool scene)
 {
-	model_obstacle.Load("Models/plane/Airplane N080714.3DS"); //TODO change model
+	if (scene == false)
+	{
+		model_obstacle.Load("Models/plane/Airplane N080714.3DS"); //TODO change model
+	}
+	else
+	{
+		model_obstacle.Load("Models/plane/Airplane N080714.3DS"); //TODO change model
+	}
 }
 
 void Obstacle::draw()
