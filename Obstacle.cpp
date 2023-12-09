@@ -22,6 +22,6 @@ void Obstacle::init(bool scene)
 void Obstacle::draw()
 {
 	glPushMatrix();
-	model_obstacle.Draw();
+	glutSolidCube(10);
 	glPopMatrix();
 }
