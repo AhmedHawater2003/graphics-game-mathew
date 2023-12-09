@@ -2,7 +2,12 @@
 #include "Player.h"
 #include "Camera.h"
 #include "Ground.h"
+#include "Obstacle.h"
 #include <glut.h>
+
+const int zMin = -100, zMax = 100;
+const int xMin = -10, xMax = 10;
+const int yPosition = 0; 
 
 FirstScene::FirstScene()
 {
@@ -12,6 +17,23 @@ FirstScene::FirstScene()
 	gameObjects["ground"] = (new Ground());
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
+
+
+    for (int i = 0; i < 7; i++) {
+
+        float xPosition = xMin + (xMax - xMin) / 6 * i;
+        float zPosition = zMin + (zMax - zMin) / 6 * i;
+
+        gameObjects["obstacle" + std::to_string(i)] = (new Obstacle())
+            ->setPosition({
+                xPosition, 
+                yPosition,
+                zPosition 
+            });
+    }
+
+
+	
 }
 
 void FirstScene::onIdle()
@@ -47,6 +69,4 @@ void FirstScene::onKeyPressed(unsigned char key, int x, int y)
 		is3rdPerson = !is3rdPerson;
 	}
 }
-
-
 
