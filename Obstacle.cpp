@@ -11,11 +11,11 @@ void Obstacle::init(bool scene)
 {
 	if (scene == false)
 	{
-		model_obstacle.Load("Models/plane/Airplane N080714.3DS"); //TODO change model
+		model_obstacle.Load("Models/building/buildnig-1.3DS");
 	}
 	else
 	{
-		model_obstacle.Load("Models/plane/Airplane N080714.3DS"); //TODO change model
+		model_obstacle.Load("Models/watertower/watertower22.3ds");
 	}
 }
 
