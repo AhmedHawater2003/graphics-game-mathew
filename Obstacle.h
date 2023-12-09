@@ -7,7 +7,7 @@ class Obstacle : public GameObject
 	Model_3DS model_obstacle;
 public:
 	Obstacle();
-	void init();
+	void init(bool scene);
 	void draw();
 };
 

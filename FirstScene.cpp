@@ -7,9 +7,6 @@
 #include "GameText.h"
 #include <glut.h>
 
-const int zMin = -100, zMax = 100;
-const int xMin = -10, xMax = 10;
-const int yPosition = 0; 
 
 FirstScene::FirstScene()
 {
@@ -18,17 +15,6 @@ FirstScene::FirstScene()
 
 	gameObjects["ground"] = (new Ground());
 
-	gameObjects["obstacle1"] = (new Obstacle)
-		->setPosition({ 0, 5, 70 });
-	gameObjects["obstacle2"] = (new Obstacle)
-		->setPosition({ 0, 5, 60 });
-	gameObjects["obstacle3"] = (new Obstacle)
-		->setPosition({ 0, 5, 40 });
-	gameObjects["obstacle4"] = (new Obstacle)
-		->setPosition({ 0, 5, 10 });
-	gameObjects["obstacle5"] = (new Obstacle)
-		->setPosition({ 0, 5, 20 });
-
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
 
@@ -36,21 +22,25 @@ FirstScene::FirstScene()
 
 	gameObjects["gameText"] = (new GameText);
 
+	gameObjects["obstacle1"] = (new Obstacle(scene))
+		->setPosition({ 0, 0, -70 });
+	gameObjects["obstacle2"] = (new Obstacle(scene))
+		->setPosition({ -5, 0, -50 });
+	gameObjects["obstacle3"] = (new Obstacle(scene))
+		->setPosition({ 6, 0, -30 });
 
-    for (int i = 0; i < 7; i++) {
+	gameObjects["obstacle4"] = (new Obstacle(scene))
+		->setPosition({ 0, 0, -5 });
 
-        float xPosition = xMin + (xMax - xMin) / 6 * i;
-        float zPosition = zMin + (zMax - zMin) / 6 * i;
+	gameObjects["obstacle5"] = (new Obstacle(scene))
+		->setPosition({ -5, 0, 20 });
 
-        gameObjects["obstacle" + std::to_string(i)] = (new Obstacle())
-            ->setPosition({
-                xPosition, 
-                yPosition,
-                zPosition 
-            });
-    }
-
-
+	gameObjects["obstacle6"] = (new Obstacle(scene))
+		->setPosition({ 7, 0, 40 });
+	
+	gameObjects["obstacle7"] = (new Obstacle(scene))
+		->setPosition({ -6, 0, 60 });
+	
 	
 }
 
