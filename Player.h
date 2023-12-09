@@ -6,6 +6,10 @@
 class Player : public GameObject
 {
 	Model_3DS model_player;
+	bool shouldMoveUp = false;
+	bool shouldMoveDown = false;
+
+	bool shouldMoveForward = true;
 public:
 	Player();
 	void init();

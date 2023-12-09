@@ -55,7 +55,7 @@ void Camera::look() const {
 void Camera::setup() const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60, aspectRatio, 1, 100000);
+    gluPerspective(60, aspectRatio, 0.5, 100000);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
