@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "Ground.h"
 #include "Obstacle.h"
+#include "Collectable.h"
+#include "Goal.h"
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
@@ -14,16 +16,8 @@ FirstScene::FirstScene()
 
 	gameObjects["ground"] = (new Ground());
 
-	gameObjects["obstacle1"] = (new Obstacle)
-		->setPosition({ 0, 5, 70 });
-	gameObjects["obstacle2"] = (new Obstacle)
-		->setPosition({ 0, 5, 60 });
-	gameObjects["obstacle3"] = (new Obstacle)
-		->setPosition({ 0, 5, 40 });
-	gameObjects["obstacle4"] = (new Obstacle)
-		->setPosition({ 0, 5, 10 });
-	gameObjects["obstacle5"] = (new Obstacle)
-		->setPosition({ 0, 5, 20 });
+	gameObjects["collectable"] = (new Collectable(true))
+		->setPosition({ 0, 5, 5 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
@@ -51,7 +45,14 @@ void FirstScene::onIdle()
 	}
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+
+	bool gameOver = Game::getInstance()->isGameOver();
+	if (gameOver) {
+		gameText->setText("Game Over // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
+	else {
+		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
 }
 
 
