@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "Ground.h"
 #include "Obstacle.h"
+#include "Collectable.h"
+#include "Goal.h"
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
@@ -12,23 +14,15 @@ FirstScene::FirstScene()
 	gameObjects["player"] = (new Player())
 		->setPosition({ 0, 15, -90 });
 
-	gameObjects["ground"] = (new Ground());
+	gameObjects["ground"] = (new Ground(true));
 
-	gameObjects["obstacle1"] = (new Obstacle)
-		->setPosition({ 0, 5, 70 });
-	gameObjects["obstacle2"] = (new Obstacle)
-		->setPosition({ 0, 5, 60 });
-	gameObjects["obstacle3"] = (new Obstacle)
-		->setPosition({ 0, 5, 40 });
-	gameObjects["obstacle4"] = (new Obstacle)
-		->setPosition({ 0, 5, 10 });
-	gameObjects["obstacle5"] = (new Obstacle)
-		->setPosition({ 0, 5, 20 });
+	gameObjects["goal"] = (new Goal(true))
+		->setPosition({ 0, 5, -30 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
 
-	gameObjects["skybox"] = (new Skybox);
+	gameObjects["skybox"] = (new Skybox(true));
 
 	gameObjects["gameText"] = (new GameText);
 }
@@ -51,7 +45,20 @@ void FirstScene::onIdle()
 	}
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+
+	bool gameOver = Game::getInstance()->isGameOver();
+	bool gameWin = Game::getInstance()->isGameWin();
+
+	if (gameOver) {
+		gameText->setText("Game Over // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
+	else if (gameWin) {
+		gameText->setText("You win!! // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+
+	}
+	else {
+		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
 }
 
 
@@ -99,7 +106,7 @@ void FirstScene::setupLights()
 		player->getPosition().getX(),
 		player->getPosition().getY() + 25,
 		player->getPosition().getZ() + 20,
-		1.0};
+		1.0 };
 	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
 	GLfloat light_diffuse1[] = { 242.0 / 255.0, 235.0 / 255.0, 104.0 / 255.0, 0.0 }; // Increase diffuse intensity
 	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
