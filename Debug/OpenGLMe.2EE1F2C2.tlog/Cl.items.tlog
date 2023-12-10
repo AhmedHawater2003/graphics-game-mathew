@@ -1,22 +1,22 @@
-C:\Users\mathe\Downloads\GraphicsProject\AnimatingValue.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\AnimatingValue.obj
-C:\Users\mathe\Downloads\GraphicsProject\Camera.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Camera.obj
-C:\Users\mathe\Downloads\GraphicsProject\Collectable.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Collectable.obj
-C:\Users\mathe\Downloads\GraphicsProject\CollisionBox.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\CollisionBox.obj
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\FirstScene.obj
-C:\Users\mathe\Downloads\GraphicsProject\Game.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Game.obj
-C:\Users\mathe\Downloads\GraphicsProject\GameObject.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\GameObject.obj
-C:\Users\mathe\Downloads\GraphicsProject\GameScene.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\GameScene.obj
-C:\Users\mathe\Downloads\GraphicsProject\GameText.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\GameText.obj
-C:\Users\mathe\Downloads\GraphicsProject\GameSettings.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\GameSettings.obj
-C:\Users\mathe\Downloads\GraphicsProject\GLTexture.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\GLTexture.obj
-C:\Users\mathe\Downloads\GraphicsProject\Goal.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Goal.obj
-C:\Users\mathe\Downloads\GraphicsProject\Ground.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Ground.obj
-C:\Users\mathe\Downloads\GraphicsProject\main.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\main.obj
-C:\Users\mathe\Downloads\GraphicsProject\Model_3DS.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Model_3DS.obj
-C:\Users\mathe\Downloads\GraphicsProject\Obstacle.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Obstacle.obj
-C:\Users\mathe\Downloads\GraphicsProject\OpenGLMeshLoader.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\OpenGLMeshLoader.obj
-C:\Users\mathe\Downloads\GraphicsProject\Player.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Player.obj
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\SecondScene.obj
-C:\Users\mathe\Downloads\GraphicsProject\Skybox.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Skybox.obj
-C:\Users\mathe\Downloads\GraphicsProject\utils.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\utils.obj
-C:\Users\mathe\Downloads\GraphicsProject\Vector3f.cpp;C:\Users\mathe\Downloads\GraphicsProject\Debug\Vector3f.obj
+E:\OneDrive\Desktop\Graphics project\AnimatingValue.cpp;E:\OneDrive\Desktop\Graphics project\Debug\AnimatingValue.obj
+E:\OneDrive\Desktop\Graphics project\Camera.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Camera.obj
+E:\OneDrive\Desktop\Graphics project\Collectable.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Collectable.obj
+E:\OneDrive\Desktop\Graphics project\CollisionBox.cpp;E:\OneDrive\Desktop\Graphics project\Debug\CollisionBox.obj
+E:\OneDrive\Desktop\Graphics project\FirstScene.cpp;E:\OneDrive\Desktop\Graphics project\Debug\FirstScene.obj
+E:\OneDrive\Desktop\Graphics project\Game.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Game.obj
+E:\OneDrive\Desktop\Graphics project\GameObject.cpp;E:\OneDrive\Desktop\Graphics project\Debug\GameObject.obj
+E:\OneDrive\Desktop\Graphics project\GameScene.cpp;E:\OneDrive\Desktop\Graphics project\Debug\GameScene.obj
+E:\OneDrive\Desktop\Graphics project\GameText.cpp;E:\OneDrive\Desktop\Graphics project\Debug\GameText.obj
+E:\OneDrive\Desktop\Graphics project\GameSettings.cpp;E:\OneDrive\Desktop\Graphics project\Debug\GameSettings.obj
+E:\OneDrive\Desktop\Graphics project\GLTexture.cpp;E:\OneDrive\Desktop\Graphics project\Debug\GLTexture.obj
+E:\OneDrive\Desktop\Graphics project\Goal.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Goal.obj
+E:\OneDrive\Desktop\Graphics project\Ground.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Ground.obj
+E:\OneDrive\Desktop\Graphics project\main.cpp;E:\OneDrive\Desktop\Graphics project\Debug\main.obj
+E:\OneDrive\Desktop\Graphics project\Model_3DS.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Model_3DS.obj
+E:\OneDrive\Desktop\Graphics project\Obstacle.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Obstacle.obj
+E:\OneDrive\Desktop\Graphics project\OpenGLMeshLoader.cpp;E:\OneDrive\Desktop\Graphics project\Debug\OpenGLMeshLoader.obj
+E:\OneDrive\Desktop\Graphics project\Player.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Player.obj
+E:\OneDrive\Desktop\Graphics project\SecondScene.cpp;E:\OneDrive\Desktop\Graphics project\Debug\SecondScene.obj
+E:\OneDrive\Desktop\Graphics project\Skybox.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Skybox.obj
+E:\OneDrive\Desktop\Graphics project\utils.cpp;E:\OneDrive\Desktop\Graphics project\Debug\utils.obj
+E:\OneDrive\Desktop\Graphics project\Vector3f.cpp;E:\OneDrive\Desktop\Graphics project\Debug\Vector3f.obj
