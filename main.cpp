@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "FirstScene.h"
 #include "utils.h"
+#include "SecondScene.h"
 
 GameSettings *gameSettings = GameSettingsBuilder()
         .setWindowWidth(1024)
@@ -18,7 +19,7 @@ void timer(int value) {
 }
 
 int main(int argc, char **argv) {
-    game->init(argc, argv, new FirstScene());
+    game->init(argc, argv, new SecondScene());
 
     glutDisplayFunc([]() {
         game->draw();

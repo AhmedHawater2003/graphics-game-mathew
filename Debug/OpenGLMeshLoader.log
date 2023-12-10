@@ -1,36 +1,12 @@
-﻿  Camera.cpp
-  Collectable.cpp
-  FirstScene.cpp
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(81,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(81,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(81,36): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(82,44): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(82,63): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(82,82): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(83,31): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(83,34): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\FirstScene.cpp(83,37): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-  Game.cpp
-  GameObject.cpp
-C:\Users\mathe\Downloads\GraphicsProject\GameObject.cpp(30,44): warning C4305: 'argument': truncation from 'double' to 'float'
-  GameScene.cpp
-  GameText.cpp
-  Goal.cpp
-  Ground.cpp
-  Obstacle.cpp
-  Player.cpp
-  SecondScene.cpp
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(81,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(81,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(81,36): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(82,44): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(82,63): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(82,82): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(83,31): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(83,34): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(83,37): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-  Skybox.cpp
-  main.cpp
-  Generating Code...
+﻿  SecondScene.cpp
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(97,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(97,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(97,36): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(98,44): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(98,63): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(98,82): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,31): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,34): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,37): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 AnimatingValue.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  OpenGLMeshLoader.vcxproj -> C:\Users\mathe\Downloads\GraphicsProject\Debug\OpenGLMeshLoader19.exe
+  OpenGLMeshLoader.vcxproj -> D:\analysis assigment\graphics project\graphics-game\Debug\OpenGLMeshLoader19.exe

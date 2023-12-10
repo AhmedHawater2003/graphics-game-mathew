@@ -6,7 +6,7 @@
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
-
+#include <Collectable.h>
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
@@ -31,6 +31,22 @@ FirstScene::FirstScene()
 	gameObjects["skybox"] = (new Skybox);
 
 	gameObjects["gameText"] = (new GameText);
+	gameObjects["collectable1"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 0,20,35 })
+		->setScale({0.5,0.5,0.5});
+	gameObjects["collectable2"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 15,50,105 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable3"] = (new Collectable(true, {22 ,30 ,10}))
+		->setPosition({-15,60,145 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable4"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 0,80,205 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable5"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 0,100,305 })
+		->setScale({ 0.5,0.5,0.5 });
+
 }
 
 void FirstScene::onIdle()
