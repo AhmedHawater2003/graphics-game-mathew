@@ -17,7 +17,7 @@ FirstScene::FirstScene()
 	gameObjects["ground"] = (new Ground(true));
 
 	gameObjects["goal"] = (new Goal(true))
-		->setPosition({ 0, 5, -30 });
+		->setPosition({ 0, 5, 65 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
@@ -41,6 +41,27 @@ FirstScene::FirstScene()
 		->setPosition({ 0,100,305 })
 		->setScale({ 0.5,0.5,0.5 });
 
+
+	gameObjects["obstacle1"] = (new Obstacle(true))
+		->setPosition({ 0, 100, -70 });
+	gameObjects["obstacle2"] = (new Obstacle(true))
+		->setPosition({ -5, 0, -50 });
+	gameObjects["obstacle3"] = (new Obstacle(true))
+		->setPosition({ 6, 0, -30 });
+
+	gameObjects["obstacle4"] = (new Obstacle(true))
+		->setPosition({ 0, 0, -5 });
+
+	gameObjects["obstacle5"] = (new Obstacle(true))
+		->setPosition({ -5, 0, 20 });
+
+	gameObjects["obstacle6"] = (new Obstacle(true))
+		->setPosition({ 7, 0, 40 });
+	
+	gameObjects["obstacle7"] = (new Obstacle(true))
+		->setPosition({ -6, 0, 60 });
+	
+	
 }
 
 void FirstScene::onIdle()
@@ -121,10 +142,10 @@ void FirstScene::setupLights()
 	GLfloat light_position1[] = {
 		player->getPosition().getX(),
 		player->getPosition().getY() + 25,
-		player->getPosition().getZ() + 20,
+		player->getPosition().getZ(),
 		1.0 };
 	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
-	GLfloat light_diffuse1[] = { 242.0 / 255.0, 235.0 / 255.0, 104.0 / 255.0, 0.0 }; // Increase diffuse intensity
+	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
 	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
 
 	GLfloat spot_direction[] = { 0.0, -2.0, 1 };

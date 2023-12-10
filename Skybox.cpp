@@ -17,6 +17,7 @@ void Skybox::init() {
 
 void Skybox::draw()
 {
+	glDisable(GL_COLOR_MATERIAL);
 	//sky box
 	glPushMatrix();
 
@@ -32,4 +33,5 @@ void Skybox::draw()
 
 
 	glPopMatrix();
+	glEnable(GL_COLOR_MATERIAL);
 }

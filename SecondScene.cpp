@@ -11,7 +11,6 @@
 
 SecondScene::SecondScene()
 {
-	gameObjects["gameText"] = (new GameText);
 
 	gameObjects["player"] = (new Player())
 		->setPosition({ 0, 15, -90 });
@@ -19,9 +18,30 @@ SecondScene::SecondScene()
 	gameObjects["ground"] = (new Ground(false));
 
 	gameObjects["goal"] = (new Goal(false))
-		->setPosition({ 0, 5, 5 });
+		->setPosition({ 0, 5, 50 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
+
+	gameObjects["obstacle1"] = (new Obstacle(false))
+		->setPosition({ 0, 100, -70 });
+	gameObjects["obstacle2"] = (new Obstacle(false))
+		->setPosition({ -5, 0, -50 });
+	gameObjects["obstacle3"] = (new Obstacle(false))
+		->setPosition({ 6, 0, -30 });
+
+	gameObjects["obstacle4"] = (new Obstacle(false))
+		->setPosition({ 0, 0, -5 });
+
+	gameObjects["obstacle5"] = (new Obstacle(false))
+		->setPosition({ -5, 0, 20 });
+
+	gameObjects["obstacle6"] = (new Obstacle(false))
+		->setPosition({ 7, 0, 40 });
+
+	gameObjects["obstacle7"] = (new Obstacle(false))
+		->setPosition({ -6, 0, 60 });
+
+	gameObjects["gameText"] = (new GameText);
 
 
 	gameObjects["skybox"] = (new Skybox(false));
@@ -122,10 +142,10 @@ void SecondScene::setupLights()
 	GLfloat light_position1[] = {
 		player->getPosition().getX(),
 		player->getPosition().getY() + 25,
-		player->getPosition().getZ() + 20,
+		player->getPosition().getZ(),
 		1.0 };
 	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
-	GLfloat light_diffuse1[] = { 242.0 / 255.0, 235.0 / 255.0, 104.0 / 255.0, 0.0 }; // Increase diffuse intensity
+	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
 	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
 
 	GLfloat spot_direction[] = { 0.0, -2.0, 1 };
