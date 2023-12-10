@@ -21,6 +21,9 @@ void Collectable::init() {
 
 void Collectable::draw() {
 	glPushMatrix();
+	if (!isFirstScene) {
+		glTranslated(0, 1, 0);
+	}
 	model_collectable.Draw();
 	glPopMatrix();
 }
