@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Ground.h"
 #include "Obstacle.h"
+#include "Goal.h"
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
@@ -10,21 +11,15 @@
 
 SecondScene::SecondScene()
 {
+	gameObjects["gameText"] = (new GameText);
+
 	gameObjects["player"] = (new Player())
 		->setPosition({ 0, 15, -90 });
 
-	gameObjects["ground"] = (new Ground());
+	gameObjects["ground"] = (new Ground(false));
 
-	gameObjects["obstacle1"] = (new Obstacle)
-		->setPosition({ 0, 5, 70 });
-	gameObjects["obstacle2"] = (new Obstacle)
-		->setPosition({ 0, 5, 60 });
-	gameObjects["obstacle3"] = (new Obstacle)
-		->setPosition({ 0, 5, 40 });
-	gameObjects["obstacle4"] = (new Obstacle)
-		->setPosition({ 0, 5, 10 });
-	gameObjects["obstacle5"] = (new Obstacle)
-		->setPosition({ 0, 5, 20 });
+	gameObjects["goal"] = (new Goal(false))
+		->setPosition({ 0, 5, 5 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
@@ -67,7 +62,20 @@ void SecondScene::onIdle()
 	}
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+
+	bool gameOver = Game::getInstance()->isGameOver();
+	bool gameWin = Game::getInstance()->isGameWin();
+
+	if (gameOver) {
+		gameText->setText("Game Over // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
+	else if (gameWin) {
+		gameText->setText("You win!! // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+
+	}
+	else {
+		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
 }
 
 
@@ -149,6 +157,3 @@ void SecondScene::onTimer(int value)
 		timeDirection = 1;
 	}
 }
-
-
-

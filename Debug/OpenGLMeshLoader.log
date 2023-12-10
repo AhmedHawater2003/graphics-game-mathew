@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  SecondScene.cpp
 D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(97,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(97,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
@@ -8,5 +9,8 @@ D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(98,82): war
 D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,31): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,34): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 D:\analysis assigment\graphics project\graphics-game\SecondScene.cpp(99,37): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+=======
+﻿  Player.cpp
+>>>>>>> master
 AnimatingValue.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
   OpenGLMeshLoader.vcxproj -> D:\analysis assigment\graphics project\graphics-game\Debug\OpenGLMeshLoader19.exe

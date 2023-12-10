@@ -10,6 +10,10 @@ class Player : public GameObject
 	bool shouldMoveDown = false;
 	bool shouldMoveForward = true;
 	bool playCrashAnimation = false;
+	bool playGroundCrash = false;
+
+	bool playCollectAnimation = false;
+	double collectAnimation = 0;
 public:
 	Player();
 	void init();
