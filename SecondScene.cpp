@@ -24,7 +24,7 @@ SecondScene::SecondScene()
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
 
-	gameObjects["skybox"] = (new Skybox);
+	gameObjects["skybox"] = (new Skybox(false));
 
 	gameObjects["gameText"] = (new GameText);
 	gameObjects["collectable1"] = (new Collectable(false, {3,2,3}))
