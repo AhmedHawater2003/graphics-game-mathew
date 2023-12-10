@@ -6,6 +6,8 @@
 #include "Collectable.h"
 #include "Ground.h"
 #include "Goal.h"
+#include "SecondScene.h"
+
 
 Player::Player()
 	: GameObject({ 3, 1, 3 })
@@ -106,7 +108,7 @@ void Player::onIdle()
 
 void Player::onSpecialKeyPressed(int key, int x, int y)
 {
-	if (playCrashAnimation || playGroundCrash) return;
+	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
 	switch (key)
 	{
@@ -134,7 +136,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 
 void Player::onMouse(int button, int state, int x, int y)
 {
-	if (playCrashAnimation || playGroundCrash) return;
+	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
 	if (button == GLUT_LEFT_BUTTON) {
 		shouldMoveUp = state == GLUT_DOWN;
@@ -171,11 +173,21 @@ void Player::onCollision(GameObject*& pObject)
 		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
 		playCollectAnimation = true;
 		collectable->setShowing(false);
+		Game::getInstance()->incrementScore();
 	}
 	
 	Goal *goal = dynamic_cast<Goal*>(pObject);
-	if (goal != nullptr) {
+	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
+		shouldMoveForward = false;
 		PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
+
+		if (Game::getInstance()->isIsFirstScene()) {
+			Game::getInstance()->setIsFirstScene(false);
+			Game::getInstance()->setScene(new SecondScene());
+		}
+		else {
+			Game::getInstance()->setGameWin(true);
+		}
 	}
 
 	Ground* ground = dynamic_cast<Ground*>(pObject);

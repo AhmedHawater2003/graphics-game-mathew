@@ -1,10 +1,14 @@
 #pragma once
 #include "GameObject.h"
-class Obstacle :
-    public GameObject
+#include "Model_3DS.h"
+
+class Obstacle : public GameObject
 {
+	bool isFirstScene;
+	Model_3DS model_obstacle;
 public:
-    Obstacle();
-    void draw();
+	Obstacle(bool isFirstScene);
+	void init();
+	void draw();
 };
 

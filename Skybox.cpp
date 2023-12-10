@@ -1,12 +1,23 @@
 #include "Skybox.h"
 #include "glut.h"
 
+Skybox::Skybox(bool isFirstScene) : isFirstScene(isFirstScene)
+{
+}
+
 void Skybox::init() {
-	tex.Load("Textures/blu-sky-3.bmp");
+	if (isFirstScene) {
+		tex.Load("Textures/blu-sky-3.bmp");
+	}
+	else {
+		tex.Load("Textures/starry-night-sky.bmp");
+	}
+
 }
 
 void Skybox::draw()
 {
+	glDisable(GL_COLOR_MATERIAL);
 	//sky box
 	glPushMatrix();
 
@@ -22,4 +33,5 @@ void Skybox::draw()
 
 
 	glPopMatrix();
+	glEnable(GL_COLOR_MATERIAL);
 }

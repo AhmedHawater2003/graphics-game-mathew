@@ -8,23 +8,60 @@
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
-
+#include <Collectable.h>
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
 		->setPosition({ 0, 15, -90 });
 
-	gameObjects["ground"] = (new Ground());
+	gameObjects["ground"] = (new Ground(true));
 
-	gameObjects["collectable"] = (new Collectable(true))
-		->setPosition({ 0, 5, 5 });
+	gameObjects["goal"] = (new Goal(true))
+		->setPosition({ 0, 5, 100 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
 
-	gameObjects["skybox"] = (new Skybox);
+	gameObjects["skybox"] = (new Skybox(true));
 
 	gameObjects["gameText"] = (new GameText);
+	gameObjects["collectable1"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 10,10,-70 })
+		->setScale({0.5,0.5,0.5});
+	gameObjects["collectable2"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 15,15,-50 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable3"] = (new Collectable(true, {22 ,30 ,10}))
+		->setPosition({15,18,-10 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable4"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 5,18,20 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable5"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ -5,20,50 })
+		->setScale({ 0.5,0.5,0.5 });
+
+
+	gameObjects["obstacle1"] = (new Obstacle(true))
+		->setPosition({ 0, 100, -70 });
+	gameObjects["obstacle2"] = (new Obstacle(true))
+		->setPosition({ -5, 0, -50 });
+	gameObjects["obstacle3"] = (new Obstacle(true))
+		->setPosition({ 6, 0, -30 });
+
+	gameObjects["obstacle4"] = (new Obstacle(true))
+		->setPosition({ 0, 0, -5 });
+
+	gameObjects["obstacle5"] = (new Obstacle(true))
+		->setPosition({ -5, 0, 20 });
+
+	gameObjects["obstacle6"] = (new Obstacle(true))
+		->setPosition({ 7, 0, 40 });
+	
+	gameObjects["obstacle7"] = (new Obstacle(true))
+		->setPosition({ -6, 0, 60 });
+	
+	
 }
 
 void FirstScene::onIdle()
@@ -47,8 +84,14 @@ void FirstScene::onIdle()
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
 
 	bool gameOver = Game::getInstance()->isGameOver();
+	bool gameWin = Game::getInstance()->isGameWin();
+
 	if (gameOver) {
 		gameText->setText("Game Over // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+	}
+	else if (gameWin) {
+		gameText->setText("You win!! // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+
 	}
 	else {
 		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
@@ -99,10 +142,10 @@ void FirstScene::setupLights()
 	GLfloat light_position1[] = {
 		player->getPosition().getX(),
 		player->getPosition().getY() + 25,
-		player->getPosition().getZ() + 20,
-		1.0};
+		player->getPosition().getZ(),
+		1.0 };
 	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
-	GLfloat light_diffuse1[] = { 242.0 / 255.0, 235.0 / 255.0, 104.0 / 255.0, 0.0 }; // Increase diffuse intensity
+	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
 	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
 
 	GLfloat spot_direction[] = { 0.0, -2.0, 1 };

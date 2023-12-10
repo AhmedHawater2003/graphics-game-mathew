@@ -14,6 +14,8 @@ class Game {
     static Game *instance;
 
     bool gameOver = false;
+    bool gameWin = false;
+    bool isFirstScene = true;
 
     explicit Game(GameSettings *gameSettings);
 
@@ -48,6 +50,14 @@ public:
     void setGameOver(bool gameOver);
 
     bool isGameOver();
+
+    void setGameWin(bool newGameWin);
+
+    bool isGameWin();
+
+    void setIsFirstScene(bool newIsFirstScene);
+
+    bool isIsFirstScene();
 };
 
 
