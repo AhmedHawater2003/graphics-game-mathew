@@ -3,7 +3,7 @@
 #include "AnimatingValue.h"
 
 Goal::Goal(bool isFirstScene)
-	: GameObject({ 10, 10, 10 }),
+	: GameObject({ 8, 10, 8 }),
 	isFirstScene(isFirstScene)
 {
 }
@@ -12,20 +12,23 @@ void Goal::init() {
 	if (isFirstScene)
 		model_goal.Load("models/Flag/Flag.3ds");
 	else
-		model_goal.Load("models/Tropyh/Tropy star N250516.3DS");
+		model_goal.Load("models/Trophy/Trophy star N250516.3DS");
 	scale.start();
 }
 
 void Goal::draw() {
 
 	glPushMatrix();
-	glScaled(50,50,50);
+	glScaled(1 + scale.getValue(), 1 + scale.getValue(), 1 + scale.getValue());
+	if (isFirstScene) {
+		glScaled(0.05, 0.05, 0.05);
+	}
 	model_goal.Draw();
 	glPopMatrix();
 
 }
 
 void Goal::onIdle() {
-	Goal::rotateBy((0, 5, 0));
+	rotateBy({ 0, 5, 0 });
 	scale.animate();
 }

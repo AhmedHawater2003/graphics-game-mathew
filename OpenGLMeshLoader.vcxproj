@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\GUC_312_61_37825_2023-11-06T13_59_16\Debug\glut32.dll" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

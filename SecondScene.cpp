@@ -47,19 +47,19 @@ SecondScene::SecondScene()
 	gameObjects["skybox"] = (new Skybox(false));
 
 	gameObjects["gameText"] = (new GameText);
-	gameObjects["collectable1"] = (new Collectable(false, {3,2,3}))
+	gameObjects["collectable1"] = (new Collectable(false, {3,3,3}))
 		->setPosition({ 10,15,-70 })
 		->setScale({ 3,3,3 });
-	gameObjects["collectable2"] = (new Collectable(false, {3,2,3}))
+	gameObjects["collectable2"] = (new Collectable(false, {3,3,3}))
 		->setPosition({ 15,25,-50 })
 		->setScale({ 3,3,3 });
-	gameObjects["collectable3"] = (new Collectable(false, {3,2,3}))
+	gameObjects["collectable3"] = (new Collectable(false, {3,3,3}))
 		->setPosition({ 15,25,-10 })
 		->setScale({ 3,3,3 });
-	gameObjects["collectable4"] = (new Collectable(false,{3,2,3}))
+	gameObjects["collectable4"] = (new Collectable(false,{3,3,3}))
 		->setPosition({ 5,30,20 })
 		->setScale({ 3,3,3 });
-	gameObjects["collectable5"] = (new Collectable(false, {3,2,3}))
+	gameObjects["collectable5"] = (new Collectable(false, {3,3,3}))
 		->setPosition({ -5,30,50 })
 		->setScale({ 3,3,3 });
 }

@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="..\GUC_312_61_37825_2023-11-06T13_59_16\Debug\glut32.dll" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -24,42 +25,29 @@
     <ClCompile Include="OpenGLMeshLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\Vector3f.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\AnimatingValue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\CollisionBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\graphics-project-main\graphics-project-main\src\GameSettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FirstScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatingValue.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collectable.cpp" />
+    <ClCompile Include="CollisionBox.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameText.cpp" />
+    <ClCompile Include="GameSettings.cpp" />
+    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="SecondScene.cpp" />
+    <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Vector3f.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLTexture.h">
@@ -68,38 +56,33 @@
     <ClInclude Include="Model_3DS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\utils.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\Vector3f.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\AnimatingValue.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\Camera.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\CollisionBox.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\GameObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\GameScene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\graphics-project-main\graphics-project-main\src\GameSettings.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FirstScene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="AnimatingValue.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collectable.h" />
+    <ClInclude Include="CollisionBox.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameText.h" />
+    <ClInclude Include="GameSettings.h" />
+    <ClInclude Include="glew.h" />
+    <ClInclude Include="glut.h" />
+    <ClInclude Include="Goal.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="SecondScene.h" />
+    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="TextureBuilder.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Vector3f.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\plane-elevate.mp3" />
   </ItemGroup>
 </Project>

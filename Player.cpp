@@ -178,6 +178,7 @@ void Player::onCollision(GameObject*& pObject)
 	
 	Goal *goal = dynamic_cast<Goal*>(pObject);
 	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
+		goal->setShowing(false);
 		shouldMoveForward = false;
 		PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
 
