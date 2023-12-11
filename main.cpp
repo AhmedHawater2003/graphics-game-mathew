@@ -8,7 +8,7 @@
 GameSettings *gameSettings = GameSettingsBuilder()
         .setWindowWidth(1024)
         .setWindowHeight(1024)
-        .setShowCollisionBoxes(true)
+        .setShowCollisionBoxes(false)
         .build();
 
 Game *game = Game::getInstance(gameSettings);
@@ -19,7 +19,7 @@ void timer(int value) {
 }
 
 int main(int argc, char **argv) {
-    game->init(argc, argv, new SecondScene());
+    game->init(argc, argv, new FirstScene());
 
     glutDisplayFunc([]() {
         game->draw();

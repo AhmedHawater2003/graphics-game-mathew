@@ -1,4 +1,10 @@
 ﻿  SecondScene.cpp
+C:\Users\mathe\Downloads\GraphicsProject\Goal.h(10,33): warning C4305: 'argument': truncation from 'double' to 'float'
+  (compiling source file 'SecondScene.cpp')
+  
+C:\Users\mathe\Downloads\GraphicsProject\Goal.h(10,29): warning C4305: 'argument': truncation from 'double' to 'float'
+  (compiling source file 'SecondScene.cpp')
+  
 C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(125,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(125,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 C:\Users\mathe\Downloads\GraphicsProject\SecondScene.cpp(125,36): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
