@@ -7,6 +7,7 @@
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
+#include <Collectable.h>
 
 SecondScene::SecondScene()
 {
@@ -17,7 +18,7 @@ SecondScene::SecondScene()
 	gameObjects["ground"] = (new Ground(false));
 
 	gameObjects["goal"] = (new Goal(false))
-		->setPosition({ 0, 5, 50 });
+		->setPosition({ 0, 5, 80 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
@@ -44,6 +45,23 @@ SecondScene::SecondScene()
 
 
 	gameObjects["skybox"] = (new Skybox(false));
+
+	gameObjects["gameText"] = (new GameText);
+	gameObjects["collectable1"] = (new Collectable(false, {3,2,3}))
+		->setPosition({ 10,15,-70 })
+		->setScale({ 3,3,3 });
+	gameObjects["collectable2"] = (new Collectable(false, {3,2,3}))
+		->setPosition({ 15,25,-50 })
+		->setScale({ 3,3,3 });
+	gameObjects["collectable3"] = (new Collectable(false, {3,2,3}))
+		->setPosition({ 15,25,-10 })
+		->setScale({ 3,3,3 });
+	gameObjects["collectable4"] = (new Collectable(false,{3,2,3}))
+		->setPosition({ 5,30,20 })
+		->setScale({ 3,3,3 });
+	gameObjects["collectable5"] = (new Collectable(false, {3,2,3}))
+		->setPosition({ -5,30,50 })
+		->setScale({ 3,3,3 });
 }
 
 void SecondScene::onIdle()

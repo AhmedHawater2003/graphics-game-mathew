@@ -8,8 +8,7 @@
 #include "Skybox.h"
 #include "GameText.h"
 #include <glut.h>
-
-
+#include <Collectable.h>
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
@@ -18,7 +17,7 @@ FirstScene::FirstScene()
 	gameObjects["ground"] = (new Ground(true));
 
 	gameObjects["goal"] = (new Goal(true))
-		->setPosition({ 0, 5, 65 });
+		->setPosition({ 0, 5, 100 });
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1));
 
@@ -26,6 +25,22 @@ FirstScene::FirstScene()
 	gameObjects["skybox"] = (new Skybox(true));
 
 	gameObjects["gameText"] = (new GameText);
+	gameObjects["collectable1"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 10,10,-70 })
+		->setScale({0.5,0.5,0.5});
+	gameObjects["collectable2"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 15,15,-50 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable3"] = (new Collectable(true, {22 ,30 ,10}))
+		->setPosition({15,18,-10 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable4"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ 5,18,20 })
+		->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable5"] = (new Collectable(true, {22,30,10}))
+		->setPosition({ -5,20,50 })
+		->setScale({ 0.5,0.5,0.5 });
+
 
 	gameObjects["obstacle1"] = (new Obstacle(true))
 		->setPosition({ 0, 100, -70 });

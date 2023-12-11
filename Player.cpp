@@ -173,6 +173,7 @@ void Player::onCollision(GameObject*& pObject)
 		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
 		playCollectAnimation = true;
 		collectable->setShowing(false);
+		Game::getInstance()->incrementScore();
 	}
 	
 	Goal *goal = dynamic_cast<Goal*>(pObject);
