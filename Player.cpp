@@ -50,15 +50,15 @@ void Player::onIdle()
 	}
 
 	if (shouldMoveForward) {
-		moveBy({ 0, -0.01, 0.2 });
+		moveBy({ 0, -0.01, 0.05 });
 	}
 	
 	if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
 		if (getAngle().getZ() > 0) {
-			rotateBy({ 0, 0, -0.6 });
+			rotateBy({ 0, 0, -0.15 });
 		}
 		else {
-			rotateBy({ 0, 0, 0.6 });
+			rotateBy({ 0, 0, 0.15 });
 		}
 	}
 	else {
@@ -74,7 +74,7 @@ void Player::onIdle()
 	}
 
 	if (shouldMoveUp) {
-		if (getPosition().getY() < 100) {
+		if (getPosition().getY() < 30) {
 			moveBy({ 0, 0.05, 0 });
 		}
 		if (getAngle().getX() > -30) {
@@ -114,7 +114,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 	{
 	case GLUT_KEY_LEFT:
 		if (getPosition().getX() < 18) {
-			moveBy({ 0.1, 0, 0 });
+			moveBy({ 0.15, 0, 0 });
 		}
 		if (getAngle().getZ() > -30) {
 			rotateBy({ 0, 0, -2 });
@@ -123,7 +123,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 
 	case GLUT_KEY_RIGHT:
 		if (getPosition().getX() > -18) {
-			moveBy({ -0.1, 0, 0 });
+			moveBy({ -0.15, 0, 0 });
 		}
 		if (getAngle().getZ() < 30) {
 			rotateBy({ 0, 0, 2 });

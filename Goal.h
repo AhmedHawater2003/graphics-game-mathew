@@ -7,7 +7,7 @@ class Goal :
 {
     bool isFirstScene;
     Model_3DS model_goal;
-    AnimatingValue scale{ 0,0.3,0.02 };
+    AnimatingValue scale{ 0,0.3,0.005 };
 
 public:
     Goal(bool isFirstScene);

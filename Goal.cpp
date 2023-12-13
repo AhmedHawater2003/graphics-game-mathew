@@ -29,6 +29,6 @@ void Goal::draw() {
 }
 
 void Goal::onIdle() {
-	rotateBy({ 0, 5, 0 });
+	rotateBy({ 0, 2, 0 });
 	scale.animate();
 }
