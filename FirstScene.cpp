@@ -12,7 +12,7 @@
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
-		->setPosition({ 0, 15, -90 });
+		->setPosition({ 0, 15, -100 });
 
 	gameObjects["ground"] = (new Ground(true));
 
