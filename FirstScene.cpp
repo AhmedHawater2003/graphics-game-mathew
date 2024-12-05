@@ -18,7 +18,7 @@
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
-		->setPosition({ 0.5, 0, 0 });
+		->setPosition({ 0, 0, 0 })->setScale(Vector3f(0.5, 0.5, 0.5));
 
 	gameObjects["ground"] = (new Ground(true));
 
@@ -81,20 +81,38 @@ void FirstScene::onIdle()
 	Camera* camera = getGameObjectByTag<Camera>("camera");
 	GameText* gameText = getGameObjectByTag<GameText>("gameText");
 
+
+	float angle = player->getAngle().getY();
+	float playerX = player->getPosition().getX();
+	float playerY = player->getPosition().getY();
+	float playerZ = player->getPosition().getZ();
+	float thirdPersonDistance = 2.0f;
+	float thirdPersonHeight = 2.0f;
+	float lookX, lookY, lookZ;
+
+
+
 	if (!isTopView) {
 		if (is3rdPerson) {
 
-			float lookX = player->getPosition().getX() + sin(player->playerRotation * M_PI / 180.0f);
-			float lookY = player->getPosition().getY() + 0.5f;
-			float lookZ = player->getPosition().getZ() - cos(player->playerRotation * M_PI / 180.0f);
-			camera->setCenter(Vector3f(lookX, lookY, lookZ) );
-			//camera->setCenter(player->getPosition() + Vector3f(0, 0, 5));
-			camera->setEye(player->getPosition() + Vector3f(0, 4, -4));
+			float camX = playerX - thirdPersonDistance * sin(angle * M_PI / 180.0f);
+			float camY = playerY + thirdPersonHeight;
+			float camZ = playerZ + thirdPersonDistance * cos(angle * M_PI / 180.0f);
+			lookX = playerX + sin(angle * M_PI / 180.0f);
+			lookY = playerY + 0.5f;
+			lookZ = playerZ- cos(angle * M_PI / 180.0f);
+
+			camera->setCenter(Vector3f(lookX, lookY, lookZ));
+			camera->setEye(Vector3f(camX, camY - 0.5, camZ));
 			camera->setUp(Vector3f(0, 1, 0));
 		}
 		else {
-			camera->setCenter(player->getPosition() + Vector3f(0, 5, 5));
-			camera->setEye(player->getPosition() + Vector3f(0, 5, 2));
+			lookX = playerX + sin(angle * M_PI / 180.0f);
+			lookY = playerY + 1.0f;
+			lookZ = playerZ - cos(angle * M_PI / 180.0f);
+
+			camera->setEye(Vector3f(playerX, playerY + 1.0f, playerZ));
+			camera->setCenter(Vector3f(lookX, lookY, lookZ));
 			camera->setUp(Vector3f(0, 1, 0));
 		}
 	}
@@ -126,7 +144,6 @@ void FirstScene::onIdle()
 void FirstScene::onSpecialKeyPressed(int key, int x, int y)
 {
 	GameScene::onSpecialKeyPressed(key, x, y);
-	Player *player = getGameObjectByTag<Player>("player");
 }
 
 void FirstScene::onKeyPressed(unsigned char key, int x, int y)

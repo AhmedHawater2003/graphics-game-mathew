@@ -21,7 +21,6 @@ public:
 		float y;
 		float z;
 	};
-	float playerRotation = 0;
 	void init();
 	void draw();
 	void onIdle();

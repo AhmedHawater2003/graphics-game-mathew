@@ -21,6 +21,7 @@ Player::Player()
 void Player::init()
 {
 	model_player.Load("Models/jinx/jinx.3ds");
+	model_player.rot.y = -90 + 25;
 }
 
 void Player::draw()
@@ -105,41 +106,42 @@ void Player::onIdle()
 
 }
 
-void Player::onSpecialKeyPressed(int key, int x, int y)
-{
+void Player::onSpecialKeyPressed(int key, int x, int y) {
 	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
+	const float playerSpeed = 0.1f;
+	const float rotationSpeed = 2.0f;
+	float angleRadians = getAngle().getY() * M_PI / 180.0f;
+	printf("Angle: %f\n", getAngle().getY());
+	float moveX = 0.0f, moveZ = 0.0f;
 
-
-	float moveX, moveZ;
-	float playerSpeed = 0.1f;
-	
-	switch (key)
-	{
+	switch (key) {
 	case GLUT_KEY_UP:
-		moveX = playerSpeed * sin(playerRotation * M_PI / 180.0f);
-		moveZ = -playerSpeed * cos(playerRotation * M_PI / 180.0f);
+		moveX = playerSpeed * sin(angleRadians);
+		moveZ = -playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
 		break;
 	case GLUT_KEY_DOWN:
-		moveX = -playerSpeed * sin(playerRotation * M_PI / 180.0f);
-		moveZ = playerSpeed * cos(playerRotation * M_PI / 180.0f);
+		moveX = -playerSpeed * sin(angleRadians);
+		moveZ = playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
 		break;
 	case GLUT_KEY_LEFT:
-		playerRotation -= 2.0f;
-		rotateBy({0, 4.0f, 0});
-		if (playerRotation < 0.0f) playerRotation += 360.0f;
+		rotateBy({ 0, -rotationSpeed, 0 });
+		model_player.rot.y += 4;
+		if (getAngle().getY() < 0.0f) rotateBy({ 0, 360, 0 });
 		break;
 	case GLUT_KEY_RIGHT:
-		playerRotation += 2.0f;
-		rotateBy({ 0, -4.0f, 0 });
-		if (playerRotation > 360.0f) playerRotation -= 360.0f;
-		break;
-	default:
+		rotateBy({ 0, +rotationSpeed, 0 });
+		model_player.rot.y -= 4;
+		if (getAngle().getY() > 360.0f) rotateBy({ 0, -360, 0 });
 		break;
 	}
+
+	printf("Position: %f, %f, %f\n", getPosition().getX(), getPosition().getY(), getPosition().getZ());
+	printf("Movex: %f, Movez: %f\n", moveX, moveZ);
 }
+
 
 void Player::onMouse(int button, int state, int x, int y)
 {
