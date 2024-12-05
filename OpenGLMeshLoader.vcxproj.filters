@@ -50,6 +50,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector3f.cpp" />
     <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeWall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLTexture.h">
@@ -84,6 +85,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector3f.h" />
     <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeWall.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\plane-elevate.mp3" />

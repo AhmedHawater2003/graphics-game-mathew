@@ -1,7 +1,6 @@
 #include "FirstScene.h"
 #include "Player.h"
 #include "Camera.h"
-#include "Ground.h"
 #include "Obstacle.h"
 #include "Collectable.h"
 #include "Goal.h"
@@ -10,6 +9,7 @@
 #include "Maze.h"
 #include <glut.h>
 #include <Collectable.h>
+#include "MazeWall.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -18,9 +18,8 @@
 FirstScene::FirstScene()
 {
 	gameObjects["player"] = (new Player())
-		->setPosition({ 0, 0, 0 })->setScale(Vector3f(0.5, 0.5, 0.5));
+		->setPosition({ 0, -2, 0 })->setScale(Vector3f(0.5, 0.5, 0.5));
 
-	gameObjects["ground"] = (new Ground(true));
 
 	gameObjects["goal"] = (new Goal(true))
 		->setPosition({ 0, 0, 100 });
@@ -34,6 +33,80 @@ FirstScene::FirstScene()
 	gameObjects["skybox"] = (new Skybox(true));
 
 	gameObjects["gameText"] = (new GameText);
+
+
+	// ----------------- MAZE WALLS ----------------------
+
+
+	gameObjects["wall1"] = (new MazeWall(true, 19.2, 10, 0.8))
+		->setPosition({ 0, 0, 9.8 }); // BOTTOM
+	gameObjects["wall2"] = (new MazeWall(true, 19.2, 10, 0.8))
+		->setPosition({ 0, 0, -9.2}); // TOP
+	gameObjects["wall3"] = (new MazeWall(true, 0.8, 10, 19.2))
+			->setPosition({ -9.8, 0, 0 }); // LEFT
+	gameObjects["wall4"] = (new MazeWall(true, 0.8, 10, 7))
+		->setPosition({ 9.2, 0, 6.8 }); // RIGHT
+	gameObjects["wall5"] = (new MazeWall(true, 0.8, 10, 7.5))
+		->setPosition({ 9.2, 0, -5 }); // RIGHT
+
+
+	gameObjects["wall111"] = (new MazeWall(true, 3, 10, 1.5))
+		->setPosition({ 10.5, 0, 7.5 }); // SPECIAL
+
+	////// -----------------------------------------------
+
+
+	gameObjects["wall6"] = (new MazeWall(true, 11, 10, 0.8))
+		->setPosition({ -7, 0, 13.1 }); // BOTTOM
+	gameObjects["wall7"] = (new MazeWall(true, 9, 10, 0.8))
+		->setPosition({ 7.5, 0, 13.1 }); // BOTTOM
+	gameObjects["wall8"] = (new MazeWall(true, 25, 10, 0.8))
+		->setPosition({ 0, 0, -12.5 }); // TOP
+	gameObjects["wall9"] = (new MazeWall(true, 0.8, 10, 25))
+		->setPosition({ -13.1, 0, 0 }); // LEFT
+	gameObjects["wall10"] = (new MazeWall(true, 0.8, 10, 25))
+		->setPosition({ 12.5, 0, 0 }); // RIGHT
+
+	gameObjects["wall222"] = (new MazeWall(true, -1.5, 10, 3))
+		->setPosition({ -7, 0, -14 }); // SPECIAL
+
+	//// -----------------------------------------------
+
+	gameObjects["wall11"] = (new MazeWall(true, 32, 10, 0.8))
+		->setPosition({ 0, 0, 16.4 }); // BOTTOM
+	gameObjects["wall12"] = (new MazeWall(true, 32, 10, 0.8))
+		->setPosition({ 0, 0, -15.8 }); // TOP
+	gameObjects["wall13"] = (new MazeWall(true, 0.8, 10, 32))
+		->setPosition({ 15.8, 0, 0 }); // RIGHT
+	gameObjects["wall14"] = (new MazeWall(true, 0.8, 10, 11))
+		->setPosition({ -16.4, 0, 11 }); // LEFT
+	gameObjects["wall15"] = (new MazeWall(true, 0.8, 10, 17))
+		->setPosition({ -16.4, 0, -7 }); // LEFT
+
+
+	gameObjects["wall333"] = (new MazeWall(true, 3, 10, 1.5))
+		->setPosition({ 17, 0, 11 }); // SPECIAL
+
+	//// -----------------------------------------------
+
+	gameObjects["wall16"] = (new MazeWall(true, 17, 10, 0.8))
+		->setPosition({ -12, 0, 19.4 }); // BOTTOM
+	gameObjects["wall17"] = (new MazeWall(true, 17, 10, 0.8))
+		->setPosition({ 10, 0, 19.4 }); // BOTTOM
+	gameObjects["wall18"] = (new MazeWall(true, 40, 10, 0.8))
+		->setPosition({ 0, 0, -19 }); // TOP
+	gameObjects["wall19"] = (new MazeWall(true, 0.8, 10, 40))
+		->setPosition({ -19.6, 0, 0 }); // LEFT
+	gameObjects["wall20"] = (new MazeWall(true, 0.8, 10, 40))
+		->setPosition({ 19, 0, 0 }); // RIGHT
+
+	//// -----------------------------------------------
+
+
+
+
+	// -----------------------------------------------
+	
 	//gameObjects["collectable1"] = (new Collectable(true, { 22,30,10 }))
 	//	->setPosition({ 0,0,5 });
 	//	->setScale({0.5,0.5,0.5});
@@ -119,7 +192,7 @@ void FirstScene::onIdle()
 	else {
 		camera->setEye(Vector3f(0, 50, 0));
 		//camera->setEye(player->getPosition() + Vector3f(0, 10, 0));
-		camera->setUp(Vector3f(0, 0, 1));
+		camera->setUp(Vector3f(0, 0, -1));
 	}
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));

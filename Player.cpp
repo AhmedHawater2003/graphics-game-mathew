@@ -8,13 +8,14 @@
 #include "Goal.h"
 #include "SecondScene.h"
 #include "Maze.h"
+#include "MazeWall.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
 
 Player::Player()
-	: GameObject({ 3, 1, 3 })
+	: GameObject({ 1, 1, 1 })
 {
 }
 
@@ -109,22 +110,24 @@ void Player::onIdle()
 void Player::onSpecialKeyPressed(int key, int x, int y) {
 	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
-	const float playerSpeed = 0.1f;
+	const float playerSpeed = 0.5f;
 	const float rotationSpeed = 2.0f;
 	float angleRadians = getAngle().getY() * M_PI / 180.0f;
-	printf("Angle: %f\n", getAngle().getY());
 	float moveX = 0.0f, moveZ = 0.0f;
 
 	switch (key) {
 	case GLUT_KEY_UP:
+		if(!shouldMoveForward) break;
 		moveX = playerSpeed * sin(angleRadians);
 		moveZ = -playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
 		break;
 	case GLUT_KEY_DOWN:
+		if(shouldMoveForward) break;
 		moveX = -playerSpeed * sin(angleRadians);
 		moveZ = playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
+		shouldMoveForward = true;
 		break;
 	case GLUT_KEY_LEFT:
 		rotateBy({ 0, -rotationSpeed, 0 });
@@ -138,8 +141,6 @@ void Player::onSpecialKeyPressed(int key, int x, int y) {
 		break;
 	}
 
-	printf("Position: %f, %f, %f\n", getPosition().getX(), getPosition().getY(), getPosition().getZ());
-	printf("Movex: %f, Movez: %f\n", moveX, moveZ);
 }
 
 
@@ -171,18 +172,26 @@ void Player::onMouse(int button, int state, int x, int y)
 
 void Player::onCollision(GameObject*& pObject)
 {
-	Obstacle *obstacle = dynamic_cast<Obstacle*>(pObject);
-	if (obstacle != nullptr && !playCrashAnimation) {
-		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
-		playCrashAnimation = true;
-	}
+	//Obstacle *obstacle = dynamic_cast<Obstacle*>(pObject);
+	//if (obstacle != nullptr && !playCrashAnimation) {
+	//	PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
+	//	playCrashAnimation = true;
+	//}
 
-	Collectable *collectable = dynamic_cast<Collectable*>(pObject);
-	if (collectable != nullptr && !playCollectAnimation) {
-		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
-		playCollectAnimation = true;
-		collectable->setShowing(false);
-		Game::getInstance()->incrementScore();
+	//Collectable *collectable = dynamic_cast<Collectable*>(pObject);
+	//if (collectable != nullptr && !playCollectAnimation) {
+	//	PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
+	//	playCollectAnimation = true;
+	//	collectable->setShowing(false);
+	//	Game::getInstance()->incrementScore();
+	//}
+
+	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
+	if (wall != nullptr) {
+		shouldMoveForward = false;
+	}
+	else {
+		shouldMoveForward = true;
 	}
 
 	//if (goal != nullptr && !Game::getInstance()->isGameWin()) {

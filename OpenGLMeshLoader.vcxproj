@@ -102,6 +102,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeWall.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OpenGLMeshLoader.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeWall.h" />
     <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
