@@ -45,62 +45,7 @@ void GameScene::onKeyPressed(unsigned char key, int mouseX, int mouseY) {
         gameObject->onKeyPressed(key, mouseX, mouseY);
     }
 
-    /*
-    float d = 1;
-    float a = 1;
-    switch (key) {
-        case 'w':
-            camera.moveY(d);
-            break;
-        case 's':
-            camera.moveY(-d);
-            break;
-        case 'a':
-            camera.moveX(d);
-            break;
-        case 'd':
-            camera.moveX(-d);
-            break;
-        case 'q':
-            camera.moveZ(d);
-            break;
-        case 'e':
-            camera.moveZ(-d);
-            break;
-        case 'u':
-            camera.rotateX(a);
-            break;
-        case 'j':
-            camera.rotateX(-a);
-            break;
-        case 'h':
-            camera.rotateY(a);
-            break;
-        case 'k':
-            camera.rotateY(-a);
-            break;
-        case 'z':
-            // Top View
-            camera.setEye({0, 80, 0});
-            camera.setCenter({0, 0, 0});
-            camera.setUp({0, 0, -1});
-            break;
-        case 'x':
-            // Front View
-            camera.setEye({0, 20, 80});
-            camera.setCenter({0, 0, 0});
-            camera.setUp({0, 1, 0});
-            break;
-        case 'c':
-            // Side View
-            camera.setEye({80, 20, 0});
-            camera.setCenter({0, 0, 0});
-            camera.setUp({0, 1, 0});
-            break;
-        default:
-            break;
-    }
-    */
+    
 }
 
 void GameScene::onSpecialKeyPressed(int key, int mouseX, int mouseY) {

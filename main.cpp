@@ -6,9 +6,9 @@
 #include "SecondScene.h"
 
 GameSettings *gameSettings = GameSettingsBuilder()
-        .setWindowWidth(1024)
-        .setWindowHeight(1024)
-        .setShowCollisionBoxes(false)
+        .setWindowWidth(1280)
+        .setWindowHeight(720)
+        .setShowCollisionBoxes(true)
         .build();
 
 Game *game = Game::getInstance(gameSettings);

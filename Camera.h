@@ -28,6 +28,8 @@ public:
     Camera(Vector3f eye, Vector3f center, Vector3f up, 
         double aspectRatio = Game::getInstance()->getGameSettings()->getAspectRatio());
 
+    void onKeyPressed(unsigned char key, int mouseX, int mouseY) {};
+
     void moveX(float d);
 
     void moveY(float d);

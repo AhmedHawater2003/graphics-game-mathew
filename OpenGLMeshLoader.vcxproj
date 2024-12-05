@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\..\simple_maze_for_vr\simple_maze\scene.bin" />
     <None Include="..\GUC_312_61_37825_2023-11-06T13_59_16\Debug\glut32.dll" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
@@ -100,6 +101,7 @@
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OpenGLMeshLoader.cpp" />
@@ -125,6 +127,7 @@
     <ClInclude Include="glut.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Maze.h" />
     <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
@@ -136,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\plane-elevate.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\3D-Game\textures\ground.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

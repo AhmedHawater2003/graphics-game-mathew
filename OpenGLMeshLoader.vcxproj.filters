@@ -3,6 +3,7 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="..\GUC_312_61_37825_2023-11-06T13_59_16\Debug\glut32.dll" />
+    <None Include="..\..\..\simple_maze_for_vr\simple_maze\scene.bin" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -48,6 +49,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector3f.cpp" />
+    <ClCompile Include="Maze.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLTexture.h">
@@ -81,8 +83,12 @@
     <ClInclude Include="TextureBuilder.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector3f.h" />
+    <ClInclude Include="Maze.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\plane-elevate.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\3D-Game\textures\ground.bmp" />
   </ItemGroup>
 </Project>

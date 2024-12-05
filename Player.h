@@ -16,6 +16,12 @@ class Player : public GameObject
 	double collectAnimation = 0;
 public:
 	Player();
+	struct Vector {
+		float x;
+		float y;
+		float z;
+	};
+	float playerRotation = 0;
 	void init();
 	void draw();
 	void onIdle();

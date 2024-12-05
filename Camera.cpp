@@ -95,3 +95,62 @@ const Vector3f &Camera::getUp() const {
 void Camera::setUp(const Vector3f &newUp) {
     up = newUp;
 }
+
+
+//void Camera::onKeyPressed(unsigned char key, int mouseX, int mouseY)
+//{
+//    float d = 1;
+//    float a = 1;
+//    switch (key) {
+//    case 'w':
+//        moveY(d);
+//        break;
+//    case 's':
+//        moveY(-d);
+//        break;
+//    case 'a':
+//        moveX(d);
+//        break;
+//    case 'd':
+//        moveX(-d);
+//        break;
+//    case 'q':
+//        moveZ(d);
+//        break;
+//    case 'e':
+//        moveZ(-d);
+//        break;
+//    case 'u':
+//        rotateX(a);
+//        break;
+//    case 'j':
+//        rotateX(-a);
+//        break;
+//    case 'h':
+//        rotateY(a);
+//        break;
+//    case 'k':
+//        rotateY(-a);
+//        break;
+//    case 'z':
+//        // Top View
+//        setEye({ 0, 80, 0 });
+//        setCenter({ 0, 0, 0 });
+//        setUp({ 0, 0, -1 });
+//        break;
+//    case 'x':
+//        // Front View
+//        setEye({ 0, 20, 80 });
+//        setCenter({ 0, 0, 0 });
+//        setUp({ 0, 1, 0 });
+//        break;
+//    case 'c':
+//        // Side View
+//        setEye({ 80, 20, 0 });
+//        setCenter({ 0, 0, 0 });
+//        setUp({ 0, 1, 0 });
+//        break;
+//    default:
+//        break;
+//    }
+//}

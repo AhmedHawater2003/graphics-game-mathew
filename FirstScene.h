@@ -4,6 +4,7 @@
 class FirstScene : public GameScene
 {
 	bool is3rdPerson = true;
+	bool isTopView = false;
 	double hourOfDay = 0;
 	double timeDirection = 1;
 	bool scene = false; // false for the first Scene, true for the second Scene

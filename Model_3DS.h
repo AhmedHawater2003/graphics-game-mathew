@@ -75,19 +75,30 @@
 // Would have greatly bloated the model class's code
 // Just replace this with your favorite texture class
 #include "GLTexture.h"
+#include<iostream>
+#include<algorithm>
+
+
 
 #include <stdio.h>
+#include "glut.h"
 
 class Model_3DS  
 {
 public:
+
 	// A VERY simple vector struct
-	// I could have included a complex class but I wanted the model class to stand alone
+// I could have included a complex class but I wanted the model class to stand alone
 	struct Vector {
 		float x;
 		float y;
 		float z;
 	};
+
+	bool Model_3DS::isModelColliding(const Model_3DS& other, const Vector& thisPosition, const Vector& thisScale,
+		const Vector& otherPosition, const Vector& otherScale);
+
+
 
 	// Vertex struct to make code easier to read in places
 	struct Vertex {
@@ -163,7 +174,6 @@ public:
 	Model_3DS();			// Constructor
 	virtual ~Model_3DS();	// Destructor
 
-private:
 	void IntColorChunkProcessor(long length, long findex, int matindex);
 	void FloatColorChunkProcessor(long length, long findex, int matindex);
 	// Processes the Main Chunk that all the other chunks exist is

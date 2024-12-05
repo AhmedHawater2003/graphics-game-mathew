@@ -7,6 +7,10 @@
 #include "Ground.h"
 #include "Goal.h"
 #include "SecondScene.h"
+#include "Maze.h"
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 
 Player::Player()
@@ -16,21 +20,19 @@ Player::Player()
 
 void Player::init()
 {
-	model_player.Load("Models/plane/Airplane N080714.3DS");
+	model_player.Load("Models/jinx/jinx.3ds");
 }
 
 void Player::draw()
 {
 	glPushMatrix();
-	double scale = collectAnimation - collectAnimation * collectAnimation;
-	glScaled(1 + 2 * scale, 1 + 2 * scale, 1 + 2 * scale);
 	model_player.Draw();
 	glPopMatrix();
 }
 
 void Player::onIdle()
 {
-	if (playCrashAnimation || playGroundCrash) {
+	/*if (playCrashAnimation || playGroundCrash) {
 		Game::getInstance()->setGameOver(true);
 
 		if (getPosition().getY() >= 5) {
@@ -46,14 +48,11 @@ void Player::onIdle()
 		if (collectAnimation >= 1) {
 			collectAnimation = 0;
 			playCollectAnimation = false;
-		}
-	}
-
-	if (shouldMoveForward) {
-		moveBy({ 0, -0.01, 0.05 });
-	}
+		}*/
 	
-	if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
+
+	
+	/*if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
 		if (getAngle().getZ() > 0) {
 			rotateBy({ 0, 0, -0.15 });
 		}
@@ -101,7 +100,7 @@ void Player::onIdle()
 		else {
 			setAngle({ 0, getAngle().getY(), getAngle().getZ() });
 		}
-	}
+	}*/
 
 
 }
@@ -110,24 +109,32 @@ void Player::onSpecialKeyPressed(int key, int x, int y)
 {
 	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
+
+
+	float moveX, moveZ;
+	float playerSpeed = 0.1f;
+	
 	switch (key)
 	{
-	case GLUT_KEY_LEFT:
-		if (getPosition().getX() < 18) {
-			moveBy({ 0.15, 0, 0 });
-		}
-		if (getAngle().getZ() > -30) {
-			rotateBy({ 0, 0, -2 });
-		}
+	case GLUT_KEY_UP:
+		moveX = playerSpeed * sin(playerRotation * M_PI / 180.0f);
+		moveZ = -playerSpeed * cos(playerRotation * M_PI / 180.0f);
+		moveBy({ moveX, 0, moveZ });
 		break;
-
+	case GLUT_KEY_DOWN:
+		moveX = -playerSpeed * sin(playerRotation * M_PI / 180.0f);
+		moveZ = playerSpeed * cos(playerRotation * M_PI / 180.0f);
+		moveBy({ moveX, 0, moveZ });
+		break;
+	case GLUT_KEY_LEFT:
+		playerRotation -= 2.0f;
+		rotateBy({0, 4.0f, 0});
+		if (playerRotation < 0.0f) playerRotation += 360.0f;
+		break;
 	case GLUT_KEY_RIGHT:
-		if (getPosition().getX() > -18) {
-			moveBy({ -0.15, 0, 0 });
-		}
-		if (getAngle().getZ() < 30) {
-			rotateBy({ 0, 0, 2 });
-		}
+		playerRotation += 2.0f;
+		rotateBy({ 0, -4.0f, 0 });
+		if (playerRotation > 360.0f) playerRotation -= 360.0f;
 		break;
 	default:
 		break;
@@ -175,25 +182,19 @@ void Player::onCollision(GameObject*& pObject)
 		collectable->setShowing(false);
 		Game::getInstance()->incrementScore();
 	}
-	
-	Goal *goal = dynamic_cast<Goal*>(pObject);
-	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
-		goal->setShowing(false);
-		shouldMoveForward = false;
-		PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
 
-		if (Game::getInstance()->isIsFirstScene()) {
-			Game::getInstance()->setIsFirstScene(false);
-			Game::getInstance()->setScene(new SecondScene());
-		}
-		else {
-			Game::getInstance()->setGameWin(true);
-		}
-	}
+	//if (goal != nullptr && !Game::getInstance()->isGameWin()) {
+	//	goal->setShowing(false);
+	//	shouldMoveForward = false;
+	//	PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
 
-	Ground* ground = dynamic_cast<Ground*>(pObject);
-	if (ground != nullptr && !playCrashAnimation) {
-		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
-		playCrashAnimation = true;
-	}
+	//	if (Game::getInstance()->isIsFirstScene()) {
+	//		Game::getInstance()->setIsFirstScene(false);
+	//		Game::getInstance()->setScene(new SecondScene());
+	//	}
+	//	else {
+	//		Game::getInstance()->setGameWin(true);
+	//	}
+	//}
+
 }

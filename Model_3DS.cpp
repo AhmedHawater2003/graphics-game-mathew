@@ -129,6 +129,8 @@
 #define PERC_INT			0x0030
 #define PERC_FLOAT			0x0031
 
+using namespace std;
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -273,6 +275,7 @@ void Model_3DS::Load(char *name)
 		}
 	}
 }
+
 
 void Model_3DS::Draw()
 {
@@ -756,7 +759,7 @@ void Model_3DS::MapNameChunkProcessor(long length, long findex, int matindex)
 		}
 	}
 
-	std::string n = name;
+	string n = name;
 	n.erase(n.end() - 3, n.end());
 	n += "bmp";
 	// Load the name and indicate that the material has a texture
@@ -1144,3 +1147,75 @@ void Model_3DS::FacesMaterialsListChunkProcessor(long length, long findex, int o
 	// from the right place
 	fseek(bin3ds, findex, SEEK_SET);
 }
+
+bool Model_3DS::isModelColliding(const Model_3DS& other, const Vector& thisPosition, const Vector& thisScale,
+	const Vector& otherPosition, const Vector& otherScale) {
+	if (Objects == nullptr || numObjects <= 0) {
+		cerr << "Error: This model's Objects array is not initialized or empty." << endl;
+		return false;
+	}
+
+	if (other.Objects == nullptr || other.numObjects <= 0) {
+		cerr << "Error: Other model's Objects array is not initialized or empty." << endl;
+		return false;
+	}
+
+	// Iterate through each object in "this" model
+	for (int i = 0; i < numObjects; ++i) {
+		if (Objects[i].Vertexes == nullptr || Objects[i].numVerts <= 0) {
+			cerr << "Error: Object[" << i << "] Vertexes not initialized or empty." << endl;
+			continue;
+		}
+
+		// Calculate bounding box for the current object in "this" model
+		GLfloat thisMinX = FLT_MAX, thisMinY = FLT_MAX, thisMinZ = FLT_MAX;
+		GLfloat thisMaxX = -FLT_MAX, thisMaxY = -FLT_MAX, thisMaxZ = -FLT_MAX;
+
+		for (int v = 0; v < Objects[i].numVerts; ++v) {
+			GLfloat x = (Objects[i].Vertexes[v * 3] * thisScale.x) + thisPosition.x + Objects[i].pos.x;
+			GLfloat y = (Objects[i].Vertexes[v * 3 + 1] * thisScale.y) + thisPosition.y + Objects[i].pos.y;  
+			GLfloat z = (Objects[i].Vertexes[v * 3 + 2] * thisScale.z) + thisPosition.z + Objects[i].pos.z;
+			thisMinX = min(thisMinX, x);
+			thisMinY = min(thisMinY, y);
+			thisMinZ = min(thisMinZ, z);
+			thisMaxX = max(thisMaxX, x);
+			thisMaxY = max(thisMaxY, y);
+			thisMaxZ = max(thisMaxZ, z);
+		}
+
+		// Iterate through each object in the "other" model
+		for (int j = 0; j < other.numObjects; ++j) {
+			if (other.Objects[j].Vertexes == nullptr || other.Objects[j].numVerts <= 0) {
+				cerr << "Error: Other Object[" << j << "] Vertexes not initialized or empty." << endl;
+				continue;
+			}
+
+			// Calculate bounding box for the current object in "other" model
+			GLfloat otherMinX = FLT_MAX, otherMinY = FLT_MAX, otherMinZ = FLT_MAX;
+			GLfloat otherMaxX = -FLT_MAX, otherMaxY = -FLT_MAX, otherMaxZ = -FLT_MAX;
+
+			for (int v = 0; v < other.Objects[j].numVerts; ++v) {
+				GLfloat x = (other.Objects[j].Vertexes[v * 3] * otherScale.x) + otherPosition.x + other.Objects[j].pos.x;
+				GLfloat y = (other.Objects[j].Vertexes[v * 3 + 1] * otherScale.y) + otherPosition.y + other.Objects[j].pos.y;
+				GLfloat z = (other.Objects[j].Vertexes[v * 3 + 2] * otherScale.z) + otherPosition.z + other.Objects[j].pos.z;
+
+				otherMinX = min(otherMinX, x);
+				otherMinY = min(otherMinY, y);
+				otherMinZ = min(otherMinZ, z);
+				otherMaxX = max(otherMaxX, x);
+				otherMaxY = max(otherMaxY, y);
+				otherMaxZ = max(otherMaxZ, z);
+			}
+
+			// Check if the bounding boxes for these two objects overlap
+			if (!(thisMaxX < otherMinX || thisMinX > otherMaxX ||
+				thisMaxY < otherMinY || thisMinY > otherMaxY ||
+				thisMaxZ < otherMinZ || thisMinZ > otherMaxZ)) {
+				return true; // Collision detected between objects
+			}
+		}
+	}
+
+	return false; // No collision detected
+}
+
