@@ -25,34 +25,6 @@ void MazeWall::draw() {
 	glPushMatrix();
 	model_maze_wall.Draw();
 	glPopMatrix();
-
-
-	//glPushMatrix();
-
-	//// Set the color with transparency (RGBA)
-	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // Blue with 50% transparency
-	//// Draw the cube
-	//glutSolidCube(1.0f); // Cube of size 1.0, scaled by glScalef
-
-	//glPopMatrix();
-
-
-	//glPushMatrix();
-	//model_maze_wall.Draw();
-
-	//// Enable blending for transparency
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	//// Set the color with transparency (RGBA)
-	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // Blue with 50% transparency
-	//// Draw the cube
-	//glutSolidCube(1.0f); // Cube of size 1.0, scaled by glScalef
-
-	////// Disable blending (optional, if no further blending is required)
-	//glDisable(GL_BLEND);
-
-	//glPopMatrix();
 }
 
 void MazeWall::onIdle() {
