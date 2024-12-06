@@ -53,6 +53,7 @@ public:
 		float z;
 	};
 	bool hasKey = false;
+	bool isColliding = false;
 	void init();
 	void draw();
 	void onIdle();

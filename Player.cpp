@@ -343,33 +343,39 @@ void Player::onCollision(GameObject*& pObject)
 	}
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
-	//if (wall != nullptr) {
-	//	shouldMoveForward = false;
-	//}
-	//else {
-	//	shouldMoveForward = true;
-	//}
+	if (wall != nullptr) {
+		if (!PlaySound("Sounds/hit-wall.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NOSTOP)) {
+			// Sound could not be played because another sound is active
+		}
+		shouldMoveForward = false;
+	}
+	else {
+		shouldMoveForward = true;
+	}
 
-	Goal *goal = dynamic_cast<Goal*>(pObject);
-	if (goal != nullptr && !Game::getInstance()->isGameWin() ) {
+	Goal* goal = dynamic_cast<Goal*>(pObject);
+	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
 		if (Game::getInstance()->isIsFirstScene()) {
+			PlaySound("Sounds/key-get.wav", NULL, SND_ASYNC | SND_FILENAME);
 			goal->setShowing(false);
 			hasKey = true;
 		}
 		else {
+			PlaySound("Sounds/treasure-find.wav", NULL, SND_ASYNC | SND_FILENAME);
 			Game::getInstance()->setScene(new DeathScene());
 		}
 	}
 
 	MazeGate* gate = dynamic_cast<MazeGate*>(pObject);
-	if (gate != nullptr && !Game::getInstance()->isGameWin() ) {
+	if (gate != nullptr && !Game::getInstance()->isGameWin()) {
 		if (hasKey) {
+			PlaySound("Sounds/gate-opening.wav", NULL, SND_ASYNC | SND_FILENAME);
 			Game::getInstance()->setIsFirstScene(false);
 			Game::getInstance()->setScene(new SecondScene());
 		}
 		else
 			shouldMoveForward = false;
-		
+
 	}
 
 }

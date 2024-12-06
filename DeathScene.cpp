@@ -22,7 +22,7 @@ void DeathScene::onIdle()
 	GameText* gameText = getGameObjectByTag<GameText>("gameText");
 
 
-	gameText->setPosition({ -0.2, 0, 0 });
-	gameText->setText("Game Over // Final Score: ");
+	gameText->setPosition({ -0.3, 0, 0 });
+	gameText->setText("YOU DID IT, ADVENTURER!");
 
 }

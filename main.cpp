@@ -20,7 +20,7 @@ void timer(int value) {
 
 
 int main(int argc, char **argv) {
-    game->init(argc, argv, new SecondScene());
+    game->init(argc, argv, new FirstScene());
 
     glutDisplayFunc([]() {
         game->draw();
