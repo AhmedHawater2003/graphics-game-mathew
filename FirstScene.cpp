@@ -29,7 +29,7 @@ FirstScene::FirstScene()
 		->setPosition({ -20, -3, 20 });
 
 
-	gameObjects["gate"] = (new MazeGate(true, { 3,4,0.2 }))
+	gameObjects["gate"] = (new MazeGate(true, { 3,4,0.1 }))
 		->setPosition({ -0.4, -2.2, 19.4 })->setScale({2.2, 2, 2});
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1280.0f/720));

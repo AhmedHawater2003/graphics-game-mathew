@@ -11,16 +11,14 @@ Maze::Maze(bool isFirstScene)
 void Maze::init() {
 	if (isFirstScene)
 		model_maze.Load("models/simple_maze/maze.3ds");
-	//else
-	//	model_maze.Load("models/Trophy/Trophy star N250516.3DS");
+	else
+		model_maze.Load("models/simple_maze2/maze.3ds");
 	scale.start();
 }
 
 void Maze::draw() {
 
 	glPushMatrix();
-	//glTranslatef(-1, -1, 0);
-	//glScalef(2, 2, 2);
 	model_maze.Draw();
 	glPopMatrix();
 

@@ -272,22 +272,29 @@ void Player::onCollision(GameObject*& pObject)
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
 	if (wall != nullptr) {
-		shouldMoveForward = false;
+	/*	shouldMoveForward = false;
 	}
 	else {
-		shouldMoveForward = true;
+		shouldMoveForward = true;*/
 	}
 
 	Goal *goal = dynamic_cast<Goal*>(pObject);
-	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
-		goal->setShowing(false);
-		hasKey = true;
+	if (goal != nullptr && !Game::getInstance()->isGameWin() ) {
+		if (Game::getInstance()->isIsFirstScene()) {
+			goal->setShowing(false);
+			hasKey = true;
+		}
+		else {
+			Game::getInstance()->setScene(new DeathScene());
+		}
 	}
 
 	MazeGate* gate = dynamic_cast<MazeGate*>(pObject);
-	if (gate != nullptr && !Game::getInstance()->isGameWin()) {
-		if(hasKey)
+	if (gate != nullptr && !Game::getInstance()->isGameWin() ) {
+		if (hasKey) {
+			Game::getInstance()->setIsFirstScene(false);
 			Game::getInstance()->setScene(new SecondScene());
+		}
 		else
 			shouldMoveForward = false;
 		

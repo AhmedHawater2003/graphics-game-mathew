@@ -1,12 +1,14 @@
 #pragma once
 #include "GameScene.h"
+#include "DeathScene.h"
 
-class SecondScene :
-    public GameScene
+class SecondScene : public GameScene
 {
 	bool is3rdPerson = true;
+	bool isTopView = false;
 	double hourOfDay = 0;
 	double timeDirection = 1;
+	bool scene = true; // false for the first Scene, true for the second Scene
 public:
 	SecondScene();
 
@@ -16,3 +18,4 @@ public:
 	void setupLights();
 	void onTimer(int value);
 };
+
