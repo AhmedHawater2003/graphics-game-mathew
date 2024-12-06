@@ -1,3 +1,12 @@
-﻿  Obstacle.cpp
+﻿  FirstScene.cpp
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(294,30): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(294,33): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(294,36): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(295,44): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(295,63): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(295,82): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(296,31): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(296,34): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+C:\Users\LEGION\source\repos\graphics-game-mathew\FirstScene.cpp(296,37): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
 AnimatingValue.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  OpenGLMeshLoader.vcxproj -> C:\Users\raedj\Source\Repos\graphics-game-mathew\Debug\OpenGLMeshLoader19.exe
+  OpenGLMeshLoader.vcxproj -> C:\Users\LEGION\Source\Repos\graphics-game-mathew\Debug\OpenGLMeshLoader19.exe

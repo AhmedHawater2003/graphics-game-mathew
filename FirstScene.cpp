@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Camera.h"
 #include "Obstacle.h"
+#include "Torch.h"
 #include "Collectable.h"
 #include "Goal.h"
 #include "Skybox.h"
@@ -145,8 +146,34 @@ FirstScene::FirstScene()
 	gameObjects["obstacle6"] = (new Obstacle(true))
 		->setPosition({ -11, -2, 18 });
 	
+
+	//-----------------Torches-----------------------
+
+	gameObjects["torch1"] = (new Torch(true))
+		->setPosition({12.11, -1, 1 })
+		->setAngle({0,-90,0});
+
+	gameObjects["torch2"] = (new Torch(true))
+		->setPosition({ -12.7, -1, 1 })
+		->setAngle({ 0,90,0 });
+
+	gameObjects["torch3"] = (new Torch(true))
+		->setPosition({ 15.4, -1, 1 })
+		->setAngle({ 0,-90,0 });
 	
-	
+	gameObjects["torch4"] = (new Torch(true))
+		->setPosition({ -5, -1, 15.9 })
+		->setAngle({ 0,180,0 });
+
+	gameObjects["torch5"] = (new Torch(true))
+		->setPosition({ -12, -1, -15.4 });
+
+	gameObjects["torch6"] = (new Torch(true))
+		->setPosition({ -7, -1, -18.8 });
+
+	gameObjects["torch7"] = (new Torch(true))
+		->setPosition({ -19.3, -1, 1 })
+		->setAngle({ 0,90,0 });
 }
 
 void FirstScene::onIdle()

@@ -53,6 +53,7 @@
     <ClCompile Include="MazeWall.cpp" />
     <ClCompile Include="DeathScene.cpp" />
     <ClCompile Include="MazeGate.cpp" />
+    <ClCompile Include="Torch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLTexture.h">
@@ -90,6 +91,7 @@
     <ClInclude Include="MazeWall.h" />
     <ClInclude Include="DeathScene.h" />
     <ClInclude Include="MazeGate.h" />
+    <ClInclude Include="Torch.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\plane-elevate.mp3" />
