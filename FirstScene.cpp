@@ -132,7 +132,7 @@ FirstScene::FirstScene()
 	gameObjects["obstacle1"] = (new Obstacle(true))
 		->setPosition({ 0, -2, -11.1 });
 	gameObjects["obstacle2"] = (new Obstacle(true))
-		->setPosition({ 0, -2, -14.1 });
+		->setPosition({ -10, -2, -14.1 });
 	gameObjects["obstacle3"] = (new Obstacle(true))
 		->setPosition({ 0, -2, -17.4 });
 
@@ -144,31 +144,34 @@ FirstScene::FirstScene()
 
 	//-----------------Torches-----------------------
 
-	gameObjects["torch1"] = (new Torch(true))
-		->setPosition({12.11, -1, 1 })
-		->setAngle({0,-90,0});
+	int currentLightID = GL_LIGHT1; // Start from GL_LIGHT1
 
-	gameObjects["torch2"] = (new Torch(true))
+	gameObjects["torch1"] = (new Torch(true, currentLightID++))
+		->setPosition({ 12.11, -1, 1 })
+		->setAngle({ 0, -90, 0 });
+
+	gameObjects["torch2"] = (new Torch(true, currentLightID++))
 		->setPosition({ -12.7, -1, 1 })
-		->setAngle({ 0,90,0 });
+		->setAngle({ 0, 90, 0 });
 
-	gameObjects["torch3"] = (new Torch(true))
-		->setPosition({ 15.4, -1, 1 })
-		->setAngle({ 0,-90,0 });
-	
-	gameObjects["torch4"] = (new Torch(true))
+	/*gameObjects["torch3"] = (new Torch(true, currentLightID++))
+		->setPosition({ 15.4, -1, -8 })
+		->setAngle({ 0, -90, 0 });*/
+
+	gameObjects["torch4"] = (new Torch(true, currentLightID++))
 		->setPosition({ -5, -1, 15.9 })
-		->setAngle({ 0,180,0 });
+		->setAngle({ 0, 180, 0 });
 
-	gameObjects["torch5"] = (new Torch(true))
-		->setPosition({ -12, -1, -15.4 });
+	gameObjects["torch5"] = (new Torch(true, currentLightID++))
+		->setPosition({ 8, -1, -15.4 });
 
-	gameObjects["torch6"] = (new Torch(true))
-		->setPosition({ -7, -1, -18.8 });
+	/*gameObjects["torch6"] = (new Torch(true, currentLightID++))
+		->setPosition({ -12, -1, -18.8 });*/
 
-	gameObjects["torch7"] = (new Torch(true))
-		->setPosition({ -19.3, -1, 1 })
-		->setAngle({ 0,90,0 });
+	/*gameObjects["torch7"] = (new Torch(true, currentLightID++))
+		->setPosition({ -19.3, -1, 5 })
+		->setAngle({ 0, 90, 0 });*/
+
 }
 
 void FirstScene::onIdle()
@@ -234,6 +237,12 @@ void FirstScene::onIdle()
 			obstacle->updateWarningLight(deltaTime);
 		}
 	}
+
+	dynamic_cast<Torch*>(gameObjects["torch1"])->animateTorch(0.04f, 'z', 0.009f);
+	dynamic_cast<Torch*>(gameObjects["torch2"])->animateTorch(0.04f, 'z', 0.009f);
+	dynamic_cast<Torch*>(gameObjects["torch4"])->animateTorch(0.04f, 'x', 0.009f);
+	dynamic_cast<Torch*>(gameObjects["torch5"])->animateTorch(0.04f, 'x', 0.009f);
+
 }
 
 
@@ -257,30 +266,24 @@ void FirstScene::onKeyPressed(unsigned char key, int x, int y)
 
 }
 
+// Member variable to track elapsed time
+double timeElapsed = 0.0; // Time elapsed since dimming started
+const double dimmingDuration = 100.0; // Duration in seconds to reach full dimming
+
 void FirstScene::setupLights()
 {
+	// Calculate the progress of dimming based on elapsed time
+	double timeProgress = min(timeElapsed / dimmingDuration, 1.0);  // Clamps to 1.0 after 100 seconds
 
+	// Calculate light intensity 'p' based on time progress (from 1.0 to 0.0)
+	double p = 1.0 - timeProgress;  // p starts at 1.0 and decreases to 0.0 over 100 seconds
 
-
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
-	//GLfloat ambient[] = { 0.1f, 0.1f, 0.1, 1.0f };
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//GLfloat diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-	//GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-	//GLfloat light_position[] = { 0.0f, 10.0f, 0.0f, 1.0f };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-
-
-
-	double p = hourOfDay / 48;
-	
+	// Set background color (clear color) to reflect the dimming process
 	glClearColor(127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f);
 
+	// Main sunlight
 	GLfloat light_position[] = { 0.0, 100.0, 0.0, 1.0 };
-	GLfloat light_ambient[] = { p, p, p, 0 };
+	GLfloat light_ambient[] = { p, p, p, 0 };  // Light dims as p decreases, but never increases
 	GLfloat light_diffuse[] = { 127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f };
 	GLfloat light_specular[] = { p, p, p, 0.0f };
 	GLfloat shininess[] = { 0.5 };
@@ -293,22 +296,20 @@ void FirstScene::setupLights()
 
 	glEnable(GL_LIGHT0);
 
-
+	// Spotlight following the player
 	Player* player = getGameObjectByTag<Player>("player");
 
-	//// Spotlight
 	GLfloat light_position1[] = {
 		player->getPosition().getX(),
 		player->getPosition().getY() + 25,
 		player->getPosition().getZ(),
 		1.0 };
 	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
-	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
-	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
+	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Bright white
+	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 };
 
 	GLfloat spot_direction[] = { 0.0, -2.0, 1 };
 
-	//// Set spotlight properties
 	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
@@ -319,20 +320,31 @@ void FirstScene::setupLights()
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
 
-	//// Enable lighting and light1
 	glEnable(GL_LIGHT1);
+
+	// Setup lighting for all torches
+	int lightIndex = GL_LIGHT1; // Start with GL_LIGHT1
+	for (const auto& pair : gameObjects)
+	{
+		Torch* torch = dynamic_cast<Torch*>(pair.second);
+		if (torch && lightIndex <= GL_LIGHT7) // Ensure we don't exceed available lights
+		{
+			torch->setupLighting();
+			lightIndex++;
+		}
+	}
 }
 
 void FirstScene::onTimer(int value)
 {
 	GameScene::onTimer(value);
 
-	hourOfDay += timeDirection;
-	if (hourOfDay == 24) {
-		timeDirection = -1;
-	}
-	else if (hourOfDay == 0) {
-		timeDirection = 1;
+	// Increment timeElapsed by the time per frame or timer tick
+	timeElapsed += 1.0f; // Adjust this based on your frame rate or timer ticks
+
+	// Stop the dimming process once timeElapsed reaches the duration (100 seconds)
+	if (timeElapsed > dimmingDuration) {
+		timeElapsed = dimmingDuration; // Ensure timeElapsed doesn't exceed 100
 	}
 }
 
