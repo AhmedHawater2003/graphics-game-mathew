@@ -2,6 +2,7 @@
 #include <glut.h>
 #include "Game.h"
 
+
 #define GLUT_KEY_ESCAPE 27
 
 Game::Game(GameSettings *gameSettings) : gameSettings(gameSettings) {
@@ -90,7 +91,10 @@ int Game::getScore()
 }
 
 void Game::incrementScore() {
-    score++;
+    if (isFirstScene)
+        score += 10;
+	else
+		score += 20;
 }
 
 void Game::setGameOver(bool newGameOver)

@@ -19,6 +19,7 @@
 Player::Player()
 	: GameObject({ 1, 1, 1 })
 {
+	
 }
 
 void Player::init()
@@ -30,12 +31,23 @@ void Player::init()
 void Player::draw()
 {
 	glPushMatrix();
+
+	// Apply sparkle color if the effect is active
+	if (sparkleStartTime != -1.0f) {
+		glColor3f(sparkleColor[0], sparkleColor[1], sparkleColor[2]); // Yellow color for sparkle effect
+	}
+	else {
+		glColor3f(originalColor[0], originalColor[1], originalColor[2]); // Original color
+	}
+
 	if (useCustomColor) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4f(color[0], color[1], color[2], color[3]);
 	}
+
 	model_player.Draw();
+
 	if (useCustomColor) {
 		glDisable(GL_BLEND);
 		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -55,8 +67,11 @@ void Player::resetColor() {
 	useCustomColor = false;
 }
 
+
 void Player::onIdle()
 {
+
+
 	if (health <= 0) {
 		Game::getInstance()->setGameOver(true);
 
@@ -81,7 +96,7 @@ void Player::onIdle()
 			//setPosition({ getPosition().getX(), getPosition().getY() - 1.0f, getPosition().getZ() });
 		}
 
-		return; 
+		return;
 	}
 
 
@@ -97,11 +112,6 @@ void Player::onIdle()
 		// Color the player model slightly red
 		setColor(1.0f, 0.2f, 0.2f, 0.5f);
 
-		// Color the collided obstacle slightly red
-		/*if (lastCollidedObstacle) {
-			lastCollidedObstacle->setColor(1.0f, 0.2f, 0.2f, 0.5f);
-		}*/
-
 		// Slightly move the player back
 		float moveBackDistance = 0.6f; // Gradually decrease the movement
 		float angleRadians = originalRotation * M_PI / 180.0f;
@@ -116,74 +126,75 @@ void Player::onIdle()
 			animationTime = 0.0f;
 			setAngle({ getAngle().getX(), getAngle().getY(), 0 });
 			resetColor(); // Reset player color
-			//if (lastCollidedObstacle) {
-			//	lastCollidedObstacle->resetColor(); // Reset obstacle color
-			//	lastCollidedObstacle = nullptr;
-			//}
-			//setPosition(originalPosition); // Reset position
 			obstacleCollisionAnimation = false;
 		}
 	}
 
-	/*if (playCollectAnimation) {
-		collectAnimation += 0.01;
-		if (collectAnimation >= 1) {
-			collectAnimation = 0;
-			playCollectAnimation = false;
-		}*/
-	
 
-	
-	/*if (getAngle().getZ() >= 0.1 || getAngle().getZ() <= -0.1) {
-		if (getAngle().getZ() > 0) {
-			rotateBy({ 0, 0, -0.15 });
-		}
-		else {
-			rotateBy({ 0, 0, 0.15 });
-		}
-	}
-	else {
-		setAngle({ getAngle().getX(), getAngle().getY(), 0});
-	}
-	
+	const float playerSpeed = 0.5f;
+	float angleRadians = getAngle().getY() * M_PI / 180.0f;
 
-	if (getAngle().getX() < -1) {
-		rotateBy({ 0.3, 0, 0 });
-	}
-	else {
-		setAngle({ 0, getAngle().getY(), getAngle().getZ() });
-	}
+	// Jump logic
+	if (isJumping) {
+		if (!isFalling) {
+			// Ascend during the jump
+			if (currentJumpHeight < jumpHeight) {
+				// Move upward
+				moveBy({ 0, jumpSpeed, 0 });
+				currentJumpHeight += jumpSpeed;
 
-	if (shouldMoveUp) {
-		if (getPosition().getY() < 30) {
-			moveBy({ 0, 0.05, 0 });
-		}
-		if (getAngle().getX() > -30) {
-			rotateBy({ -1.5, 0, 0 });
-		}
-	} 
-
-	if (shouldMoveDown) {
-		moveBy({ 0, -0.1, 0 });
-		if (getAngle().getX() > 30) {
-			rotateBy({ 2, 0, 0 });
-		}
-	}
-	
-	if (!shouldMoveUp && ! shouldMoveDown) {
-		if (getAngle().getX() < -1 || getAngle().getX() > 1) {
-			if (getAngle().getX() > 0) {
-				rotateBy({ -0.4, 0, 0 });
+				// Move forward in the direction player is facing
+				moveBy({
+					jumpDirectionX * (forwardJumpDistance * (currentJumpHeight / jumpHeight)),
+					0,
+					jumpDirectionZ * (forwardJumpDistance * (currentJumpHeight / jumpHeight))
+					});
 			}
 			else {
-				rotateBy({ 0.4, 0, 0 });
+				// Peak reached, start falling
+				isFalling = true;
 			}
 		}
 		else {
-			setAngle({ 0, getAngle().getY(), getAngle().getZ() });
-		}
-	}*/
+			// Descend during the fall
+			if (currentJumpHeight > 0.0f) {
+				// Move downward
+				moveBy({ 0, -jumpSpeed, 0 });
+				currentJumpHeight -= jumpSpeed;
 
+				// Continue moving forward in the direction player is facing
+				moveBy({
+					jumpDirectionX * (forwardJumpDistance * (currentJumpHeight / jumpHeight)),
+					0,
+					jumpDirectionZ * (forwardJumpDistance * (currentJumpHeight / jumpHeight))
+					});
+			}
+			else {
+				// Landing
+				isJumping = false;
+				isFalling = false;
+				currentJumpHeight = 0.0f;
+
+				// Snap player back to ground level
+				setPosition({ getPosition().getX(), -2, getPosition().getZ() });
+			}
+		}
+	}
+
+
+	if (sparkleStartTime != -1.0f) {
+		// Check how much time has passed since the sparkle effect started
+		float currentTime = glutGet(GLUT_ELAPSED_TIME);
+		float elapsedTime = (currentTime - sparkleStartTime) / 1000.0f; // Time in seconds
+
+		if (elapsedTime >= 2.0f) {
+			// After 2 seconds, revert to the original color
+			sparkleStartTime = -1.0f;
+			originalColor[0] = 1.0f; // Red
+			originalColor[1] = 1.0f; // Green
+			originalColor[2] = 1.0f; // Blue
+		}
+	}
 
 }
 
@@ -197,14 +208,18 @@ void Player::onSpecialKeyPressed(int key, int x, int y) {
 
 	switch (key) {
 	case GLUT_KEY_UP:
-		if(!shouldMoveForward) break;
-		moveX = playerSpeed * sin(angleRadians);
-		moveZ = -playerSpeed * cos(angleRadians);
-		moveBy({ moveX, 0, moveZ });
-		//playCrashAnimation = false;
+		if (!shouldMoveForward) break;
+		if (!isJumping) {
+			moveX = playerSpeed * sin(angleRadians);
+			moveZ = -playerSpeed * cos(angleRadians);
+			moveBy({ moveX, 0, moveZ });
+		}
+		else {
+			isMovingForwardWhileJumping = true;
+		}
 		break;
 	case GLUT_KEY_DOWN:
-		if(shouldMoveForward) break;
+		if (shouldMoveForward) break;
 		moveX = -playerSpeed * sin(angleRadians);
 		moveZ = playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
@@ -220,10 +235,44 @@ void Player::onSpecialKeyPressed(int key, int x, int y) {
 		model_player.rot.y -= 4;
 		if (getAngle().getY() > 360.0f) rotateBy({ 0, -360, 0 });
 		break;
-	}
 
+
+	}
 }
 
+
+void Player::onKeyPressed(unsigned char key, int x, int y) {
+	if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+
+	const float playerSpeed = 0.5f;
+	const float rotationSpeed = 2.0f;
+	float angleRadians = getAngle().getY() * M_PI / 180.0f;
+	float moveX = 0.0f, moveZ = 0.0f;
+
+	if (key == ' ') {
+		{
+			PlaySound("Sounds/jump.wav", NULL, SND_ASYNC | SND_FILENAME);
+			// Jump only if not already jumping and moving forward is allowed
+			if (!isJumping && !isFalling && shouldMoveForward) {
+				isJumping = true;
+				isFalling = false;
+				currentJumpHeight = 0.0f;
+
+				// Calculate jump direction based on current facing angle
+				jumpDirectionX = sin(angleRadians);
+				jumpDirectionZ = -cos(angleRadians);
+			}
+		}
+	}
+}
+
+void Player::onSpecialKeyReleased(int key, int x, int y)
+{
+	if (key == GLUT_KEY_UP) {
+		// Stop moving forward when UP key is released
+		isMovingForwardWhileJumping = false;
+	}
+}
 
 void Player::onMouse(int button, int state, int x, int y)
 {
@@ -278,13 +327,20 @@ void Player::onCollision(GameObject*& pObject)
 	}
 
 
-	//Collectable *collectable = dynamic_cast<Collectable*>(pObject);
-	//if (collectable != nullptr && !playCollectAnimation) {
-	//	PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
-	//	playCollectAnimation = true;
-	//	collectable->setShowing(false);
-	//	Game::getInstance()->incrementScore();
-	//}
+	Collectable* collectable = dynamic_cast<Collectable*>(pObject);
+	if (collectable != nullptr) {
+		PlaySound("Sounds/collect.wav", NULL, SND_ASYNC | SND_FILENAME);
+		collectable->setShowing(false);
+		Game::getInstance()->incrementScore();
+
+		// Start the sparkle effect by changing the player's color to yellow
+		originalColor[0] = 1.0f; // Red
+		originalColor[1] = 1.0f; // Green
+		originalColor[2] = 1.0f; // Blue
+
+		// Record the time when the sparkle effect started
+		sparkleStartTime = glutGet(GLUT_ELAPSED_TIME);
+	}
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
 	//if (wall != nullptr) {
