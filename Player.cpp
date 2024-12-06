@@ -191,7 +191,7 @@ void Player::onSpecialKeyPressed(int key, int x, int y) {
 		moveX = -playerSpeed * sin(angleRadians);
 		moveZ = playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
-		//shouldMoveForward = true;
+		shouldMoveForward = true;
 		break;
 	case GLUT_KEY_LEFT:
 		rotateBy({ 0, -rotationSpeed, 0 });
