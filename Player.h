@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Model_3DS.h"
 #include "AnimatingValue.h"
+#include <chrono>
 
 class Player : public GameObject
 {
@@ -29,12 +30,12 @@ class Player : public GameObject
 
 	bool playCollectAnimation = false;
 	double collectAnimation = 0;
-	double health = 100;
 	void setColor(float r, float g, float b, float a);
 	void resetColor();
 	float color[4];
 	bool useCustomColor= false;
 	bool hasFallen = false;
+	std::chrono::steady_clock::time_point lastHealthUpdateTime;
 
 
 	
@@ -52,6 +53,7 @@ public:
 		float y;
 		float z;
 	};
+	double health = 100;
 	bool hasKey = false;
 	void init();
 	void draw();

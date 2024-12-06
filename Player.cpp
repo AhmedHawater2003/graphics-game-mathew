@@ -196,6 +196,23 @@ void Player::onIdle()
 		}
 	}
 
+	if (!Game::getInstance()->isIsFirstScene()) {
+		// Decrease health every 3 seconds
+		auto currentTime = std::chrono::steady_clock::now();
+		if (lastHealthUpdateTime == std::chrono::steady_clock::time_point{}) {
+			lastHealthUpdateTime = currentTime; // Initialize timer
+		}
+		else {
+			auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(currentTime - lastHealthUpdateTime).count();
+			if (elapsedTime >= 3) { // Only update health every 3 seconds
+				health -= elapsedTime / 3; // Decrease health based on how many 3-second intervals have passed
+				if (health < 0) health = 0; // Ensure health doesn't go below 0
+				lastHealthUpdateTime += std::chrono::seconds(elapsedTime / 3 * 3); // Update timer
+				std::cout << "Health decreased to: " << health << std::endl;
+			}
+		}
+	}
+
 }
 
 void Player::onSpecialKeyPressed(int key, int x, int y) {

@@ -191,8 +191,8 @@ void SecondScene::onIdle()
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
 
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
-	
+	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()) + "Health: " + std::to_string(player->health));
+
 }
 
 

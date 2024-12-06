@@ -229,7 +229,7 @@ void FirstScene::onIdle()
 	gameText->setPosition(Vector3f(-0.9f, 0.9f, -1.0f)); // Adjust these values as needed for screen placement
 
 
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()) + "        Health: " + std::to_string(player->health));
 	
 
 	// Update warning lights for obstacles
