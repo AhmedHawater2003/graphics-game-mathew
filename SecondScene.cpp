@@ -33,12 +33,12 @@ SecondScene::SecondScene()
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1280.0f / 720));
 
 
-	gameObjects["skybox"] = (new Skybox(true));
+	gameObjects["skybox"] = (new Skybox(false));
 
 	gameObjects["gameText"] = (new GameText);
 
 
-	// ----------------- MAZE WALLS ----------------------
+	 //----------------- MAZE WALLS ----------------------
 
 	gameObjects["wall1"] = (new MazeWall(false, 19.2, 4, 0.5))
 		->setPosition({ 0, 0, 9.8 }); // BOTTOM
@@ -104,31 +104,31 @@ SecondScene::SecondScene()
 
 
 	gameObjects["collectable2"] = (new Collectable(false, { 5,5,5 }))
-		->setPosition({ 8, -4, -1 })
+		->setPosition({ 8, -2.5, -1 })
 		->setScale({ 0.5,0.5,0.5 });
 
 	gameObjects["collectable_wall3"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ -8.8, -4, 0 })
+		->setPosition({ -8.8, -2.5, 0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall4"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 8.8, -4, 6.8 })
+		->setPosition({ 8.8, -2.5, 6.8 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall5"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 8.8, -4, -5.0 })
+		->setPosition({ 8.8, -2.5, -5.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall6"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ -7, -4, 12.0 })
+		->setPosition({ -7, -2.5, 12.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall7"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 7.5, -4, 12.0 })
+		->setPosition({ 7.5, -2.5, 12.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall8"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 0, -4, -10.5 })
+		->setPosition({ 0, -2.5, -10.5 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 
