@@ -19,7 +19,7 @@
 SecondScene::SecondScene()
 {
 	gameObjects["player"] = (new Player())
-		->setPosition({ -0.4, -2.2, 19.4 })->setScale(Vector3f(0.5, 0.5, 0.5));
+		->setPosition({ -0.4, -2, 19.4 })->setScale(Vector3f(0.5, 0.5, 0.5));
 
 
 	gameObjects["goal"] = (new Goal(false))
