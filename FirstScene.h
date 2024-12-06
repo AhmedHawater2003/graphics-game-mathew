@@ -14,6 +14,7 @@ public:
 
 	void onIdle();
 	void onSpecialKeyPressed(int key, int x, int y);
+	void onMouse(int button, int state, int x, int y);
 	void onKeyPressed(unsigned char key, int x, int y);
 	void setupLights();
 	void onTimer(int value);

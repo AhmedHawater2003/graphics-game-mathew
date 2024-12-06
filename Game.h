@@ -20,7 +20,7 @@ class Game {
     explicit Game(GameSettings *gameSettings);
 
 public:
-
+   
     void draw();
 
     void setScene(GameScene *newScene);
