@@ -9,11 +9,16 @@ class Player : public GameObject
 	bool shouldMoveUp = false;
 	bool shouldMoveDown = false;
 	bool shouldMoveForward = true;
-	bool playCrashAnimation = false;
-	bool playGroundCrash = false;
+	bool obstacleCollisionAnimation = false;
 
 	bool playCollectAnimation = false;
 	double collectAnimation = 0;
+	double health = 100;
+	void setColor(float r, float g, float b, float a);
+	void resetColor();
+	float color[4];
+	bool useCustomColor= false;
+
 public:
 	Player();
 	struct Vector {

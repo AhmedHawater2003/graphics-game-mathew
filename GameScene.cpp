@@ -3,6 +3,7 @@
 #include "GameScene.h"
 
 void GameScene::draw() {
+    if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
     for (auto &[_, gameObject]: gameObjects) {
         if (!gameObject->isShowing()) {
             continue;
@@ -78,6 +79,10 @@ void GameScene::onIdle() {
 }
 
 void GameScene::setupLights() {
+    
+    if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+
+
     // Light 0
     GLfloat light0Position[] = {-7.0f, 6.0f, 3.0f, 0.0f};
     GLfloat light0Ambient[] = {0.3f, 0.3f, 0.3, 1.0f};
