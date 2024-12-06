@@ -10,7 +10,7 @@ Obstacle::Obstacle(bool isFirstScene) : GameObject({ 1.8, 0.5, 1.8 }), isFirstSc
     warningLightIntensity = 0.0f;
     warningLightPhase = 0.0f;
     glowRadius = 3.0f;
-    glowIntensity = 0.5f;
+    glowIntensity = 0.5;
 }
 
 void Obstacle::init() {
@@ -33,28 +33,10 @@ void Obstacle::draw() {
     }
     model_obstacle.Draw();
 
-    // Draw the warning light
-    glPushMatrix();
-    glTranslatef(0, 2.0f, 0); // Position the light above the obstacle
-    glDisable(GL_LIGHTING);
-    glColor4f(1.0f, 0.0f, 0.0f, warningLightIntensity); // Red color with varying intensity
-    glutSolidSphere(0.2, 10, 10);
-    glEnable(GL_LIGHTING);
     glPopMatrix();
-
-    // Set up the warning light
-    GLfloat light_position[] = { 0.0f, 2.0f, 0.0f, 1.0f };
-    GLfloat light_diffuse[] = { 1.0f, 0.0f, 0.0f, warningLightIntensity };
-    glLightfv(GL_LIGHT2, GL_POSITION, light_position);
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, light_diffuse);
-    glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.5f);
-    glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.1f);
-    glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.05f);
-
-    glPopMatrix();
-
-    // Draw the ground glow
+    
     drawGroundGlow();
+
 }
 
 void Obstacle::updateWarningLight(float deltaTime) {
@@ -67,6 +49,8 @@ void Obstacle::updateWarningLight(float deltaTime) {
 }
 
 void Obstacle::drawGroundGlow() {
+    glPushAttrib(GL_ENABLE_BIT | GL_CURRENT_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glPushMatrix();
     glTranslatef(0, 0.01f, 0); // Slightly above the ground to prevent z-fighting
     glDisable(GL_LIGHTING);
@@ -74,19 +58,20 @@ void Obstacle::drawGroundGlow() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glBegin(GL_TRIANGLE_FAN);
+
     glColor4f(1.0f, 0.0f, 0.0f, glowIntensity);
+
     glVertex3f(0, 0, 0); // Center of the glow
 
     for (int i = 0; i <= 360; i += 10) {
         float angle = i * M_PI / 180.0f;
         float x = glowRadius * cos(angle);
         float z = glowRadius * sin(angle);
-        glColor4f(1.0f, 0.0f, 0.0f, 0.0f); // Fade to transparent at the edges
+        glColor4f(1.0f, 0.0f, 0.0f, 0.0f); // Properly fade edges
         glVertex3f(x, 0, z);
     }
     glEnd();
 
-    glDisable(GL_BLEND);
-    glEnable(GL_LIGHTING);
     glPopMatrix();
+    glPopAttrib();
 }

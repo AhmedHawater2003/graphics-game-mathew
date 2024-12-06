@@ -250,10 +250,9 @@ void Player::onCollision(GameObject*& pObject)
 		float moveZ = -playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
 
+		obstacleCollisionAnimation = true;
 		if (Game::getInstance()->isIsFirstScene()) {
 			health -= 20;
-			obstacleCollisionAnimation = true;
-			//lastCollidedObstacle = obstacle; // Store the collided obstacle
 		}
 		else {
 			health -= 25;
@@ -271,12 +270,12 @@ void Player::onCollision(GameObject*& pObject)
 	//}
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
-	if (wall != nullptr) {
-		shouldMoveForward = false;
-	}
-	else {
-		shouldMoveForward = true;
-	}
+	//if (wall != nullptr) {
+	//	shouldMoveForward = false;
+	//}
+	//else {
+	//	shouldMoveForward = true;
+	//}
 
 	Goal *goal = dynamic_cast<Goal*>(pObject);
 	if (goal != nullptr && !Game::getInstance()->isGameWin() ) {

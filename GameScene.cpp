@@ -3,7 +3,7 @@
 #include "GameScene.h"
 
 void GameScene::draw() {
-    if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+    //if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
     for (auto &[_, gameObject]: gameObjects) {
         if (!gameObject->isShowing()) {
             continue;
@@ -80,7 +80,7 @@ void GameScene::onIdle() {
 
 void GameScene::setupLights() {
     
-    if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
+    //if (Game::getInstance()->isGameOver() || Game::getInstance()->isGameWin()) return;
 
 
     // Light 0

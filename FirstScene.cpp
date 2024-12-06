@@ -142,10 +142,6 @@ FirstScene::FirstScene()
 	gameObjects["obstacle5"] = (new Obstacle(true))
 		->setPosition({ 17.0, -2, 0 });
 
-	gameObjects["obstacle6"] = (new Obstacle(true))
-		->setPosition({ -11, -2, 18 });
-	
-
 	//-----------------Torches-----------------------
 
 	gameObjects["torch1"] = (new Torch(true))
@@ -177,6 +173,7 @@ FirstScene::FirstScene()
 
 void FirstScene::onIdle()
 {
+
 	GameScene::onIdle();
 
 	Player *player = getGameObjectByTag<Player>("player");
@@ -226,19 +223,8 @@ void FirstScene::onIdle()
 
 	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
 
-	bool gameOver = Game::getInstance()->isGameOver();
-	bool gameWin = Game::getInstance()->isGameWin();
-
-	if (gameOver) {
-		Game::getInstance()->setScene(new DeathScene);
-	}
-	else if (gameWin) {
-		Game::getInstance()->setScene(new DeathScene);
-
-	}
-	else {
-		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
-	}
+	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	
 
 	// Update warning lights for obstacles
 	float deltaTime = 1.0f / 60.0f; // Assuming 60 FPS, adjust if needed
@@ -274,16 +260,20 @@ void FirstScene::onKeyPressed(unsigned char key, int x, int y)
 void FirstScene::setupLights()
 {
 
-	/*glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	GLfloat ambient[] = { 0.1f, 0.1f, 0.1, 1.0f };
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	GLfloat diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-	GLfloat light_position[] = { 0.0f, 10.0f, 0.0f, 1.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);*/
+
+
+	//glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHT0);
+	//GLfloat ambient[] = { 0.1f, 0.1f, 0.1, 1.0f };
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	//GLfloat diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	//GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	//GLfloat light_position[] = { 0.0f, 10.0f, 0.0f, 1.0f };
+	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+
 
 	double p = hourOfDay / 48;
 	
@@ -331,17 +321,6 @@ void FirstScene::setupLights()
 
 	//// Enable lighting and light1
 	glEnable(GL_LIGHT1);
-
-	// Set up warning light (GL_LIGHT2)
-	GLfloat warning_ambient[] = { 0.2f, 0.0f, 0.0f, 1.0f };
-	GLfloat warning_diffuse[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-	GLfloat warning_specular[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-
-	glLightfv(GL_LIGHT2, GL_AMBIENT, warning_ambient);
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, warning_diffuse);
-	glLightfv(GL_LIGHT2, GL_SPECULAR, warning_specular);
-
-	glEnable(GL_LIGHT2);
 }
 
 void FirstScene::onTimer(int value)
