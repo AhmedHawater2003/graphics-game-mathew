@@ -213,6 +213,15 @@ void FirstScene::onIdle()
 	else {
 		gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
 	}
+
+	// Update warning lights for obstacles
+	float deltaTime = 1.0f / 60.0f; // Assuming 60 FPS, adjust if needed
+	for (const auto& pair : gameObjects) {
+		Obstacle* obstacle = dynamic_cast<Obstacle*>(pair.second);
+		if (obstacle) {
+			obstacle->updateWarningLight(deltaTime);
+		}
+	}
 }
 
 
@@ -239,7 +248,7 @@ void FirstScene::onKeyPressed(unsigned char key, int x, int y)
 void FirstScene::setupLights()
 {
 
-	glEnable(GL_LIGHTING);
+	/*glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	GLfloat ambient[] = { 0.1f, 0.1f, 0.1, 1.0f };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
@@ -248,53 +257,65 @@ void FirstScene::setupLights()
 	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 	GLfloat light_position[] = { 0.0f, 10.0f, 0.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);*/
+
+	double p = hourOfDay / 48;
+	
+	glClearColor(127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f);
+
+	GLfloat light_position[] = { 0.0, 100.0, 0.0, 1.0 };
+	GLfloat light_ambient[] = { p, p, p, 0 };
+	GLfloat light_diffuse[] = { 127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f };
+	GLfloat light_specular[] = { p, p, p, 0.0f };
+	GLfloat shininess[] = { 0.5 };
+
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//double p = hourOfDay / 48;
-	//
-	////glClearColor(127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SHININESS, shininess);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
-	//GLfloat light_position[] = { 0.0, 100.0, 0.0, 1.0 };
-	//GLfloat light_ambient[] = { p, p, p, 0 };
-	//GLfloat light_diffuse[] = { 127.0 / 255.0 * p, 207.0 / 255.0 * p, 255.0 / 255.0 * p, 0.0f };
-	//GLfloat light_specular[] = { p, p, p, 0.0f };
-	//GLfloat shininess[] = { 0.5 };
-
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	//glLightfv(GL_LIGHT0, GL_SHININESS, shininess);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-
-	//glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
 
 
-	//Player* player = getGameObjectByTag<Player>("player");
+	Player* player = getGameObjectByTag<Player>("player");
 
 	//// Spotlight
-	//GLfloat light_position1[] = {
-	//	player->getPosition().getX(),
-	//	player->getPosition().getY() + 25,
-	//	player->getPosition().getZ(),
-	//	1.0 };
-	//GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
-	//GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
-	//GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
+	GLfloat light_position1[] = {
+		player->getPosition().getX(),
+		player->getPosition().getY() + 25,
+		player->getPosition().getZ(),
+		1.0 };
+	GLfloat light_ambient1[] = { 0.1, 0.1, 0.1, 0.0 };
+	GLfloat light_diffuse1[] = { 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 0.0 }; // Increase diffuse intensity
+	GLfloat light_specular1[] = { 0.2, 0.2, 0.2, 0.0 }; // Increase specular intensity
 
-	//GLfloat spot_direction[] = { 0.0, -2.0, 1 };
+	GLfloat spot_direction[] = { 0.0, -2.0, 1 };
 
 	//// Set spotlight properties
-	//glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
-	//glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient1);
-	//glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
-	//glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
-	//glLightfv(GL_LIGHT1, GL_SHININESS, shininess);
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient1);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
+	glLightfv(GL_LIGHT1, GL_SHININESS, shininess);
 
-	//glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
-	//glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
-	//glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 30.0);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spot_direction);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
 
 	//// Enable lighting and light1
-	//glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT1);
+
+	// Set up warning light (GL_LIGHT2)
+	GLfloat warning_ambient[] = { 0.2f, 0.0f, 0.0f, 1.0f };
+	GLfloat warning_diffuse[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat warning_specular[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+
+	glLightfv(GL_LIGHT2, GL_AMBIENT, warning_ambient);
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, warning_diffuse);
+	glLightfv(GL_LIGHT2, GL_SPECULAR, warning_specular);
+
+	glEnable(GL_LIGHT2);
 }
 
 void FirstScene::onTimer(int value)
