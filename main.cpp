@@ -8,7 +8,7 @@
 GameSettings *gameSettings = GameSettingsBuilder()
         .setWindowWidth(1280)
         .setWindowHeight(720)
-        .setShowCollisionBoxes(true)
+        .setShowCollisionBoxes(false)
         .build();
 
 Game *game = Game::getInstance(gameSettings);

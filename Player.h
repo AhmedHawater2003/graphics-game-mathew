@@ -54,7 +54,7 @@ public:
 		float y;
 		float z;
 	};
-	double health = 100;
+	float health = 100;
 	bool hasKey = false;
 	bool isColliding = false;
 	void init();

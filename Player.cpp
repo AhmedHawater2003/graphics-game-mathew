@@ -112,14 +112,14 @@ void Player::onIdle()
 		// Color the player model slightly red
 		setColor(1.0f, 0.2f, 0.2f, 0.5f);
 
-		if (!wallCollision) {
-			// Slightly move the player back
-			float moveBackDistance = 0.6f; // Gradually decrease the movement
-			float angleRadians = originalRotation * M_PI / 180.0f;
-			float moveX = moveBackDistance * sin(angleRadians);
-			float moveZ = moveBackDistance * cos(angleRadians);
-			setPosition({ originalPosition.getX() - moveX, originalPosition.getY(), originalPosition.getZ() + moveZ });
-		}
+		//if (!wallCollision) {
+		//	 Slightly move the player back
+		//	float moveBackDistance = 0.6f; // Gradually decrease the movement
+		//	float angleRadians = originalRotation * M_PI / 180.0f;
+		//	float moveX = moveBackDistance * sin(angleRadians);
+		//	float moveZ = moveBackDistance * cos(angleRadians);
+		//	setPosition({ originalPosition.getX() - moveX, originalPosition.getY(), originalPosition.getZ() + moveZ });
+		//}
 
 		animationTime += 0.016f; // Assuming 60 FPS
 
@@ -301,22 +301,10 @@ void Player::onMouse(int button, int state, int x, int y)
 	if (button == GLUT_LEFT_BUTTON) {
 		shouldMoveUp = state == GLUT_DOWN;
 
-		if (shouldMoveUp) {
-			PlaySound("Sounds/plane-elevate.wav", NULL, SND_ASYNC | SND_FILENAME);
-		}
-		else {
-			PlaySound(NULL, NULL, SND_ASYNC);
-		}
 	}
 	else if (button == GLUT_RIGHT_BUTTON) {
 		shouldMoveDown = state == GLUT_DOWN;
 
-		if (shouldMoveDown) {
-			PlaySound("Sounds/plane-elevate.wav", NULL, SND_ASYNC | SND_FILENAME);
-		}
-		else {
-			PlaySound(NULL, NULL, SND_ASYNC);
-		}
 	}
 }
 
