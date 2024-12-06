@@ -272,10 +272,10 @@ void Player::onCollision(GameObject*& pObject)
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
 	if (wall != nullptr) {
-	/*	shouldMoveForward = false;
+		shouldMoveForward = false;
 	}
 	else {
-		shouldMoveForward = true;*/
+		shouldMoveForward = true;
 	}
 
 	Goal *goal = dynamic_cast<Goal*>(pObject);

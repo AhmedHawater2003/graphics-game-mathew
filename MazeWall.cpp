@@ -7,36 +7,52 @@ MazeWall::MazeWall(bool isFirstScene, float x, float y, float z): lengthX(x), le
 }
 
 void MazeWall::init() {
-	//if (isFirstScene) {
-	//	model_maze_wall
-	//		.Load("Models/parachute/Hot Air Balloon Iridesium/Air_Balloon.3DS");
-	//}
-	//else {
-	//	model_maze_wall
-	//		.Load("Models/airdrop/AIRDROP.3DS");
-	//}
+	if (isFirstScene) {
+		model_maze_wall
+			.Load("Models/maze_wall/grass.3ds");
+	}
+	else {
+		model_maze_wall
+			.Load("Models/maze_wall/rock.3ds");
+	}
+	model_maze_wall.scale = 0.5f;
 	setScale({ lengthX, lengthY, lengthZ });
-	//setAngle({ 0, this->angle, 0 });
 
 }
 
 void MazeWall::draw() {
 
 	glPushMatrix();
-
-	// Enable blending for transparency
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	// Set the color with transparency (RGBA)
-	glColor4f(1.0f, 1.0f, 1.0f, 0.0f); // Blue with 50% transparency
-	// Draw the cube
-	glutSolidCube(1.0f); // Cube of size 1.0, scaled by glScalef
-
-	// Disable blending (optional, if no further blending is required)
-	glDisable(GL_BLEND);
-
+	model_maze_wall.Draw();
 	glPopMatrix();
+
+
+	//glPushMatrix();
+
+	//// Set the color with transparency (RGBA)
+	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // Blue with 50% transparency
+	//// Draw the cube
+	//glutSolidCube(1.0f); // Cube of size 1.0, scaled by glScalef
+
+	//glPopMatrix();
+
+
+	//glPushMatrix();
+	//model_maze_wall.Draw();
+
+	//// Enable blending for transparency
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	//// Set the color with transparency (RGBA)
+	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // Blue with 50% transparency
+	//// Draw the cube
+	//glutSolidCube(1.0f); // Cube of size 1.0, scaled by glScalef
+
+	////// Disable blending (optional, if no further blending is required)
+	//glDisable(GL_BLEND);
+
+	//glPopMatrix();
 }
 
 void MazeWall::onIdle() {
