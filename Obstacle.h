@@ -6,6 +6,7 @@ class Obstacle : public GameObject
 {
 	bool isFirstScene;
 	Model_3DS model_obstacle;
+
 public:
 	Obstacle(bool isFirstScene);
 	void init();

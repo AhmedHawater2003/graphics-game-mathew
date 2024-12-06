@@ -28,13 +28,34 @@ void Player::init()
 void Player::draw()
 {
 	glPushMatrix();
+	if (useCustomColor) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glColor4f(color[0], color[1], color[2], color[3]);
+	}
 	model_player.Draw();
+	if (useCustomColor) {
+		glDisable(GL_BLEND);
+		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	}
 	glPopMatrix();
+}
+
+void Player::setColor(float r, float g, float b, float a) {
+	color[0] = r;
+	color[1] = g;
+	color[2] = b;
+	color[3] = a;
+	useCustomColor = true;
+}
+
+void Player::resetColor() {
+	useCustomColor = false;
 }
 
 void Player::onIdle()
 {
-	/*if (playCrashAnimation || playGroundCrash) {
+	if (health<=0) {
 		Game::getInstance()->setGameOver(true);
 
 		if (getPosition().getY() >= 5) {
@@ -45,7 +66,47 @@ void Player::onIdle()
 		return;
 	}
 
-	if (playCollectAnimation) {
+	if (obstacleCollisionAnimation) {
+		static float animationTime = 0.0f;
+		static float originalRotation = getAngle().getY();
+		static Vector3f originalPosition = getPosition();
+
+		// Tilt the camera
+		float tiltAngle = sin(animationTime * 10) * 5.0f; // 5 degree max tilt
+		setAngle({ getAngle().getX(), getAngle().getY(), tiltAngle });
+
+		// Color the player model slightly red
+		setColor(1.0f, 0.2f, 0.2f, 0.5f);
+
+		// Color the collided obstacle slightly red
+		/*if (lastCollidedObstacle) {
+			lastCollidedObstacle->setColor(1.0f, 0.2f, 0.2f, 0.5f);
+		}*/
+
+		// Slightly move the player back
+		float moveBackDistance = 0.05f * (1.0f - animationTime); // Gradually decrease the movement
+		float angleRadians = originalRotation * M_PI / 180.0f;
+		float moveX = moveBackDistance * sin(angleRadians);
+		float moveZ = moveBackDistance * cos(angleRadians);
+		setPosition({ originalPosition.getX() - moveX, originalPosition.getY(), originalPosition.getZ() + moveZ });
+
+		animationTime += 0.016f; // Assuming 60 FPS
+
+		if (animationTime >= 1.0f) {
+			// Reset animation
+			animationTime = 0.0f;
+			setAngle({ getAngle().getX(), getAngle().getY(), 0 });
+			resetColor(); // Reset player color
+			//if (lastCollidedObstacle) {
+			//	lastCollidedObstacle->resetColor(); // Reset obstacle color
+			//	lastCollidedObstacle = nullptr;
+			//}
+			setPosition(originalPosition); // Reset position
+			obstacleCollisionAnimation = false;
+		}
+	}
+
+	/*if (playCollectAnimation) {
 		collectAnimation += 0.01;
 		if (collectAnimation >= 1) {
 			collectAnimation = 0;
@@ -121,13 +182,14 @@ void Player::onSpecialKeyPressed(int key, int x, int y) {
 		moveX = playerSpeed * sin(angleRadians);
 		moveZ = -playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
+		//playCrashAnimation = false;
 		break;
 	case GLUT_KEY_DOWN:
 		if(shouldMoveForward) break;
 		moveX = -playerSpeed * sin(angleRadians);
 		moveZ = playerSpeed * cos(angleRadians);
 		moveBy({ moveX, 0, moveZ });
-		shouldMoveForward = true;
+		//shouldMoveForward = true;
 		break;
 	case GLUT_KEY_LEFT:
 		rotateBy({ 0, -rotationSpeed, 0 });
@@ -172,11 +234,31 @@ void Player::onMouse(int button, int state, int x, int y)
 
 void Player::onCollision(GameObject*& pObject)
 {
-	//Obstacle *obstacle = dynamic_cast<Obstacle*>(pObject);
-	//if (obstacle != nullptr && !playCrashAnimation) {
-	//	PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
-	//	playCrashAnimation = true;
-	//}
+	const float playerSpeed = 0.5f;
+	float angleRadians = getAngle().getY() * M_PI / 180.0f;
+	float moveX = 0.0f, moveZ = 0.0f;
+
+	Obstacle* obstacle = dynamic_cast<Obstacle*>(pObject);
+	if (obstacle != nullptr) {
+		PlaySound("Sounds/crash.wav", NULL, SND_ASYNC | SND_FILENAME);
+
+		const float playerSpeed = 0.5f;
+		float angleRadians = getAngle().getY() * M_PI / 180.0f;
+		float moveX = -playerSpeed * sin(angleRadians);
+		float moveZ = -playerSpeed * cos(angleRadians);
+		moveBy({ moveX, 0, moveZ });
+
+		if (Game::getInstance()->isIsFirstScene()) {
+			health -= 20;
+			obstacleCollisionAnimation = true;
+			//lastCollidedObstacle = obstacle; // Store the collided obstacle
+		}
+		else {
+			health -= 25;
+		}
+		std::cout << "Player health: " << health << std::endl;
+	}
+
 
 	//Collectable *collectable = dynamic_cast<Collectable*>(pObject);
 	//if (collectable != nullptr && !playCollectAnimation) {

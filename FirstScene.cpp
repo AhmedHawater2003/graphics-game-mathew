@@ -124,24 +124,22 @@ FirstScene::FirstScene()
 	//	->setScale({ 0.5,0.5,0.5 });
 
 
-	//gameObjects["obstacle1"] = (new Obstacle(true))
-	//	->setPosition({ 0, 100, -70 });
-	//gameObjects["obstacle2"] = (new Obstacle(true))
-	//	->setPosition({ -5, 0, -50 });
-	//gameObjects["obstacle3"] = (new Obstacle(true))
-	//	->setPosition({ 6, 0, -30 });
+	gameObjects["obstacle1"] = (new Obstacle(true))
+		->setPosition({ 0, -2, -11.1 });
+	gameObjects["obstacle2"] = (new Obstacle(true))
+		->setPosition({ 0, -2, -14.1 });
+	gameObjects["obstacle3"] = (new Obstacle(true))
+		->setPosition({ 0, -2, -17.4 });
 
-	//gameObjects["obstacle4"] = (new Obstacle(true))
-	//	->setPosition({ 0, 0, -5 });
+	gameObjects["obstacle4"] = (new Obstacle(true))
+		->setPosition({ -15.0, -2, 10 });
 
-	//gameObjects["obstacle5"] = (new Obstacle(true))
-	//	->setPosition({ -5, 0, 20 });
+	gameObjects["obstacle5"] = (new Obstacle(true))
+		->setPosition({ 17.0, -2, 0 });
 
-	//gameObjects["obstacle6"] = (new Obstacle(true))
-	//	->setPosition({ 7, 0, 40 });
-	//
-	//gameObjects["obstacle7"] = (new Obstacle(true))
-	//	->setPosition({ -6, 0, 60 });
+	gameObjects["obstacle6"] = (new Obstacle(true))
+		->setPosition({ -11, -2, 18 });
+	
 	
 	
 }
@@ -201,10 +199,10 @@ void FirstScene::onIdle()
 	bool gameWin = Game::getInstance()->isGameWin();
 
 	if (gameOver) {
-		gameText->setText("Game Over // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+		Game::getInstance()->setScene(new DeathScene);
 	}
 	else if (gameWin) {
-		gameText->setText("You win!! // Final Score: " + std::to_string(Game::getInstance()->getScore()));
+		Game::getInstance()->setScene(new DeathScene);
 
 	}
 	else {

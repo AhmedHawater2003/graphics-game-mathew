@@ -91,6 +91,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
+    <ClCompile Include="DeathScene.cpp" />
     <ClCompile Include="FirstScene.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="CollisionBox.h" />
+    <ClInclude Include="DeathScene.h" />
     <ClInclude Include="FirstScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

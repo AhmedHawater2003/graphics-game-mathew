@@ -1,5 +1,6 @@
 #pragma once
 #include "GameScene.h"
+#include "DeathScene.h"
 
 class FirstScene : public GameScene
 {
