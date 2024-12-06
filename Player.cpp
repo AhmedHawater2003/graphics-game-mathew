@@ -7,8 +7,10 @@
 #include "Ground.h"
 #include "Goal.h"
 #include "SecondScene.h"
+#include "DeathScene.h"
 #include "Maze.h"
 #include "MazeWall.h"
+#include "MazeGate.h"
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -194,18 +196,19 @@ void Player::onCollision(GameObject*& pObject)
 		shouldMoveForward = true;
 	}
 
-	//if (goal != nullptr && !Game::getInstance()->isGameWin()) {
-	//	goal->setShowing(false);
-	//	shouldMoveForward = false;
-	//	PlaySound("Sounds/win.wav", NULL, SND_ASYNC | SND_FILENAME);
+	Goal *goal = dynamic_cast<Goal*>(pObject);
+	if (goal != nullptr && !Game::getInstance()->isGameWin()) {
+		goal->setShowing(false);
+		hasKey = true;
+	}
 
-	//	if (Game::getInstance()->isIsFirstScene()) {
-	//		Game::getInstance()->setIsFirstScene(false);
-	//		Game::getInstance()->setScene(new SecondScene());
-	//	}
-	//	else {
-	//		Game::getInstance()->setGameWin(true);
-	//	}
-	//}
+	MazeGate* gate = dynamic_cast<MazeGate*>(pObject);
+	if (gate != nullptr && !Game::getInstance()->isGameWin()) {
+		if(hasKey)
+			Game::getInstance()->setScene(new SecondScene());
+		else
+			shouldMoveForward = false;
+		
+	}
 
 }

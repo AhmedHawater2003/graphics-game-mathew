@@ -10,6 +10,7 @@
 #include <glut.h>
 #include <Collectable.h>
 #include "MazeWall.h"
+#include "MazeGate.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -22,10 +23,14 @@ FirstScene::FirstScene()
 
 
 	gameObjects["goal"] = (new Goal(true))
-		->setPosition({ 0, 0, 100 });
+		->setPosition({ 10.5, -2, 11 })->setScale({0.2, 0.2, 0.2});
 
 	gameObjects["maze"] = (new Maze(true))
 		->setPosition({ -20, -3, 20 });
+
+
+	gameObjects["gate"] = (new MazeGate(true, { 3,4,0.2 }))
+		->setPosition({ -0.4, -2.2, 19.4 })->setScale({2.2, 2, 2});
 
 	gameObjects["camera"] = (new Camera({ 0, 20, -105 }, { 0, 0, 0 }, { 0, 1, 0 }, 1280.0f/720));
 
@@ -106,7 +111,7 @@ FirstScene::FirstScene()
 
 
 	// -----------------------------------------------
-	
+	//
 	//gameObjects["collectable1"] = (new Collectable(true, { 22,30,10 }))
 	//	->setPosition({ 0,0,5 });
 	//	->setScale({0.5,0.5,0.5});

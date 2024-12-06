@@ -51,6 +51,8 @@
     <ClCompile Include="Vector3f.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeWall.cpp" />
+    <ClCompile Include="DeathScene.cpp" />
+    <ClCompile Include="MazeGate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLTexture.h">
@@ -86,6 +88,8 @@
     <ClInclude Include="Vector3f.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="MazeWall.h" />
+    <ClInclude Include="DeathScene.h" />
+    <ClInclude Include="MazeGate.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\plane-elevate.mp3" />

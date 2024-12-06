@@ -91,6 +91,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
+    <ClCompile Include="DeathScene.cpp" />
     <ClCompile Include="FirstScene.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeGate.cpp" />
     <ClCompile Include="MazeWall.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -117,6 +119,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="CollisionBox.h" />
+    <ClInclude Include="DeathScene.h" />
     <ClInclude Include="FirstScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -129,6 +132,7 @@
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeGate.h" />
     <ClInclude Include="MazeWall.h" />
     <ClInclude Include="Model_3DS.h" />
     <ClInclude Include="Obstacle.h" />

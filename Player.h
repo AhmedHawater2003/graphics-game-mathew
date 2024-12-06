@@ -21,6 +21,7 @@ public:
 		float y;
 		float z;
 	};
+	bool hasKey = false;
 	void init();
 	void draw();
 	void onIdle();
