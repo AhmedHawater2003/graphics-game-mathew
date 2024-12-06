@@ -18,6 +18,8 @@ class Player : public GameObject
 	void resetColor();
 	float color[4];
 	bool useCustomColor= false;
+	bool hasFallen = false;
+
 
 public:
 	Player();

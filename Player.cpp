@@ -57,16 +57,33 @@ void Player::resetColor() {
 
 void Player::onIdle()
 {
-	if (health<=0) {
+	if (health <= 0) {
 		Game::getInstance()->setGameOver(true);
 
-		if (getPosition().getY() >= 5) {
-			moveBy({ 0, -0.1, 0 });
-			rotateBy({ 0, 2, 0 });
+		static float fallProgress = 0.0f;
+		if (!hasFallen) {
+			fallProgress = 0.0f;
+			hasFallen = true;
 		}
 
-		return;
+		if (fallProgress < 1.0f) {
+			float fallSpeed = 0.02f;
+			float newAngle = getAngle().getZ() + (90.0f - getAngle().getZ()) * fallSpeed;
+			float newY = getPosition().getY() - fallSpeed * 2.0f;
+
+			setAngle({ getAngle().getX(), getAngle().getY(), newAngle });
+			//setPosition({ getPosition().getX(), newY, getPosition().getZ() });
+
+			fallProgress += fallSpeed;
+		}
+		else {
+			setAngle({ getAngle().getX(), getAngle().getY(), 90.0f });
+			//setPosition({ getPosition().getX(), getPosition().getY() - 1.0f, getPosition().getZ() });
+		}
+
+		return; 
 	}
+
 
 	if (obstacleCollisionAnimation) {
 		static float animationTime = 0.0f;
