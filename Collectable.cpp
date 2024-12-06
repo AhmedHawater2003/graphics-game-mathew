@@ -4,15 +4,16 @@
 Collectable::Collectable(bool isFirstScene , Vector3f collisionBoxsize) 
 	: GameObject(collisionBoxsize), 
 	isFirstScene(isFirstScene)
-{
-}
+{}
 
 void Collectable::init() {
 	if (isFirstScene) {
 		model_collectable
-			.Load("Models/parachute/Hot Air Balloon Iridesium/Air_Balloon.3DS");
+			.Load("models/coin/coin.3ds");
+		
 	}
 	else {
+		//change to diamond
 		model_collectable
 			.Load("Models/airdrop/AIRDROP.3DS");
 	}
@@ -22,9 +23,10 @@ void Collectable::init() {
 void Collectable::draw() {
 	glPushMatrix();
 	if (!isFirstScene) {
-		glTranslated(0, 1, 0);
+		glTranslated(0, 0.5, 0); // Adjustment for airdrop model
 	}
-	model_collectable.Draw();
+
+	model_collectable.Draw(); // Render the model
 	glPopMatrix();
 }
 
@@ -37,5 +39,4 @@ void Collectable::onIdle() {
 }
 void Collectable::onCollision(GameObject*& pObject) {
 	translationalAnimation = false;
-
 }

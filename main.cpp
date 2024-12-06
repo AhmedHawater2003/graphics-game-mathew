@@ -18,6 +18,7 @@ void timer(int value) {
     glutTimerFunc(1000, timer, value + 1);
 }
 
+
 int main(int argc, char **argv) {
     game->init(argc, argv, new FirstScene());
 
@@ -40,6 +41,7 @@ int main(int argc, char **argv) {
     glutMouseFunc([](int button, int state, int x, int y) {
 		game->onMouse(button, state, x, y);
 	});
+
 
     timer(0);
 
