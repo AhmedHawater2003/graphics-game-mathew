@@ -112,12 +112,14 @@ void Player::onIdle()
 		// Color the player model slightly red
 		setColor(1.0f, 0.2f, 0.2f, 0.5f);
 
-		// Slightly move the player back
-		float moveBackDistance = 0.6f; // Gradually decrease the movement
-		float angleRadians = originalRotation * M_PI / 180.0f;
-		float moveX = moveBackDistance * sin(angleRadians);
-		float moveZ = moveBackDistance * cos(angleRadians);
-		setPosition({ originalPosition.getX() - moveX, originalPosition.getY(), originalPosition.getZ() + moveZ });
+		if (!wallCollision) {
+			// Slightly move the player back
+			float moveBackDistance = 0.6f; // Gradually decrease the movement
+			float angleRadians = originalRotation * M_PI / 180.0f;
+			float moveX = moveBackDistance * sin(angleRadians);
+			float moveZ = moveBackDistance * cos(angleRadians);
+			setPosition({ originalPosition.getX() - moveX, originalPosition.getY(), originalPosition.getZ() + moveZ });
+		}
 
 		animationTime += 0.016f; // Assuming 60 FPS
 
@@ -127,6 +129,7 @@ void Player::onIdle()
 			setAngle({ getAngle().getX(), getAngle().getY(), 0 });
 			resetColor(); // Reset player color
 			obstacleCollisionAnimation = false;
+			wallCollision = false;
 		}
 	}
 
@@ -361,6 +364,13 @@ void Player::onCollision(GameObject*& pObject)
 
 	MazeWall *wall = dynamic_cast<MazeWall*>(pObject);
 	if (wall != nullptr) {
+		const float playerSpeed = 0.1f;
+		float angleRadians = getAngle().getY() * M_PI / 180.0f;
+		float moveX = -playerSpeed * sin(angleRadians);
+		float moveZ = -playerSpeed * cos(angleRadians);
+
+		obstacleCollisionAnimation = true;
+		wallCollision = true;
 		if (!PlaySound("Sounds/hit-wall.wav", NULL, SND_ASYNC | SND_FILENAME | SND_NOSTOP)) {
 			// Sound could not be played because another sound is active
 		}

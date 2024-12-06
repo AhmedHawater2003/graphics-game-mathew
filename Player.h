@@ -26,6 +26,7 @@ class Player : public GameObject
 	float jumpDirectionX = 0.0f;
 	float jumpDirectionZ = 0.0f;
 	bool obstacleCollisionAnimation = false;
+	bool wallCollision = false;
 
 
 	bool playCollectAnimation = false;
