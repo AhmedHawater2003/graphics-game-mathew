@@ -104,31 +104,31 @@ SecondScene::SecondScene()
 
 
 	gameObjects["collectable2"] = (new Collectable(false, { 5,5,5 }))
-		->setPosition({ 8, -2, -1 })
+		->setPosition({ 8, -4, -1 })
 		->setScale({ 0.5,0.5,0.5 });
 
 	gameObjects["collectable_wall3"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ -8.8, -2, 0 })
+		->setPosition({ -8.8, -4, 0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall4"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 8.8, -2, 6.8 })
+		->setPosition({ 8.8, -4, 6.8 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall5"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 8.8, -2, -5.0 })
+		->setPosition({ 8.8, -4, -5.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall6"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ -7, -2, 12.0 })
+		->setPosition({ -7, -4, 12.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall7"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 7.5, -2, 12.0 })
+		->setPosition({ 7.5, -4, 12.0 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 	gameObjects["collectable_wall8"] = (new Collectable(false, { 5, 5, 5 }))
-		->setPosition({ 0, -2, -10.5 })
+		->setPosition({ 0, -4, -10.5 })
 		->setScale({ 0.5, 0.5, 0.5 });
 
 
@@ -224,7 +224,7 @@ void SecondScene::onIdle()
 
 	gameText->setPosition(Vector3f(-0.9f, 0.9f, -1.0f)); // Adjust these values as needed for screen placement
 
-	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
+	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()) + "        Health: " + std::to_string(player->health));
 
 	dynamic_cast<Torch*>(gameObjects["torch1"])->animateTorch(0.04f, 'z', 0.009f);
 	dynamic_cast<Torch*>(gameObjects["torch2"])->animateTorch(0.04f, 'z', 0.009f);

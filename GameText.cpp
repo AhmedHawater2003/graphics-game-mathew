@@ -3,7 +3,7 @@
 
 
 void GameText::draw() {
-    drawText(text, 0.9f, 0.9f, 0xFF0000); // Red color for visibility
+    drawText(text, 0.9f, 0.9f, 0xFFFF00); // Red color for visibility
 }
 
 GameText *GameText::setText(std::string newText)
