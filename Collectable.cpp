@@ -1,8 +1,8 @@
 #include "Collectable.h"
 #include "glut.h"
 
-Collectable::Collectable(bool isFirstScene , Vector3f collisionBoxsize) 
-	: GameObject(collisionBoxsize), 
+Collectable::Collectable(bool isFirstScene, Vector3f collisionBoxsize)
+	: GameObject(collisionBoxsize),
 	isFirstScene(isFirstScene)
 {}
 
@@ -10,12 +10,11 @@ void Collectable::init() {
 	if (isFirstScene) {
 		model_collectable
 			.Load("models/coin/coin.3ds");
-		
+
 	}
 	else {
-		//change to diamond
 		model_collectable
-			.Load("Models/airdrop/AIRDROP.3DS");
+			.Load("Models/diamond/diamond.3ds");
 	}
 
 }
@@ -35,7 +34,7 @@ void Collectable::onIdle() {
 		moveBy({ 0,-0.05,0 });
 	}
 	rotateBy({ 0,2,0 });
-	
+
 }
 void Collectable::onCollision(GameObject*& pObject) {
 	translationalAnimation = false;

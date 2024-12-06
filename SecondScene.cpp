@@ -102,25 +102,34 @@ SecondScene::SecondScene()
 		->setPosition({ 19, 0, 0 }); // RIGHT
 
 
+	gameObjects["collectable2"] = (new Collectable(false, { 5,5,5 }))
+		->setPosition({ 8, -2, -1 })
+		->setScale({ 0.5,0.5,0.5 });
 
+	gameObjects["collectable_wall3"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ -8.8, -2, 0 })
+		->setScale({ 0.5, 0.5, 0.5 });
 
-	// -----------------------------------------------
-	//
-	//gameObjects["collectable1"] = (new Collectable(true, { 22,30,10 }))
-	//	->setPosition({ 0,0,5 });
-	//	->setScale({0.5,0.5,0.5});
-	//gameObjects["collectable2"] = (new Collectable(true, {22,30,10}))
-	//	->setPosition({ 15,15,-50 })
-	//	->setScale({ 0.5,0.5,0.5 });
-	//gameObjects["collectable3"] = (new Collectable(true, {22 ,30 ,10}))
-	//	->setPosition({15,18,-10 })
-	//	->setScale({ 0.5,0.5,0.5 });
-	//gameObjects["collectable4"] = (new Collectable(true, {22,30,10}))
-	//	->setPosition({ 5,18,20 })
-	//	->setScale({ 0.5,0.5,0.5 });
-	//gameObjects["collectable5"] = (new Collectable(true, {22,30,10}))
-	//	->setPosition({ -5,20,50 })
-	//	->setScale({ 0.5,0.5,0.5 });
+	gameObjects["collectable_wall4"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ 8.8, -2, 6.8 })
+		->setScale({ 0.5, 0.5, 0.5 });
+
+	gameObjects["collectable_wall5"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ 8.8, -2, -5.0 })
+		->setScale({ 0.5, 0.5, 0.5 });
+
+	gameObjects["collectable_wall6"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ -7, -2, 12.0 })
+		->setScale({ 0.5, 0.5, 0.5 });
+
+	gameObjects["collectable_wall7"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ 7.5, -2, 12.0 })
+		->setScale({ 0.5, 0.5, 0.5 });
+
+	gameObjects["collectable_wall8"] = (new Collectable(false, { 5, 5, 5 }))
+		->setPosition({ 0, -2, -10.5 })
+		->setScale({ 0.5, 0.5, 0.5 });
+
 
 
 	gameObjects["obstacle1"] = (new Obstacle(false))
@@ -189,10 +198,23 @@ void SecondScene::onIdle()
 		camera->setUp(Vector3f(0, 0, -1));
 	}
 
-	gameText->setPosition(player->getPosition() + Vector3f(50, 10, 100));
+	gameText->setPosition(Vector3f(-0.9f, 0.9f, -1.0f)); // Adjust these values as needed for screen placement
 
 	gameText->setText("Score: " + std::to_string(Game::getInstance()->getScore()));
-	
+
+	// Position the score above the player
+	Vector3f playerPosition = player->getPosition();
+
+	if (!is3rdPerson) {
+		float A = playerX + sin(angle * M_PI / 180.0f);
+		float B = playerY + 1.0f;
+		float C = playerZ - cos(angle * M_PI / 180.0f);
+		gameText->setPosition(Vector3f(A + 0.1, B, C + 0.1));
+	}
+	else {
+		gameText->setPosition(Vector3f(playerPosition.getX(), playerPosition.getY() + 1.5f, playerPosition.getZ()));
+	}
+
 }
 
 
@@ -202,14 +224,20 @@ void SecondScene::onSpecialKeyPressed(int key, int x, int y)
 	GameScene::onSpecialKeyPressed(key, x, y);
 }
 
+void SecondScene::onMouse(int button, int state, int x, int y)
+{
+	GameScene::onMouse(button, state, x, y);
+
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		is3rdPerson = !is3rdPerson;
+		isTopView = false;
+	}
+}
+
 void SecondScene::onKeyPressed(unsigned char key, int x, int y)
 {
 	GameScene::onKeyPressed(key, x, y);
 
-	if (key == '1') {
-		is3rdPerson = !is3rdPerson;
-		isTopView = false;
-	}
 	if (key == '2') {
 		isTopView = !isTopView;
 	}
