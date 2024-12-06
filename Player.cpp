@@ -86,7 +86,7 @@ void Player::onIdle()
 		}*/
 
 		// Slightly move the player back
-		float moveBackDistance = 0.05f * (1.0f - animationTime); // Gradually decrease the movement
+		float moveBackDistance = 0.6f; // Gradually decrease the movement
 		float angleRadians = originalRotation * M_PI / 180.0f;
 		float moveX = moveBackDistance * sin(angleRadians);
 		float moveZ = moveBackDistance * cos(angleRadians);
@@ -103,7 +103,7 @@ void Player::onIdle()
 			//	lastCollidedObstacle->resetColor(); // Reset obstacle color
 			//	lastCollidedObstacle = nullptr;
 			//}
-			setPosition(originalPosition); // Reset position
+			//setPosition(originalPosition); // Reset position
 			obstacleCollisionAnimation = false;
 		}
 	}

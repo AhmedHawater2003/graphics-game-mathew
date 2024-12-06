@@ -111,6 +111,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SecondScene.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="Torch.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector3f.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="SecondScene.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="TextureBuilder.h" />
+    <ClInclude Include="Torch.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector3f.h" />
   </ItemGroup>
