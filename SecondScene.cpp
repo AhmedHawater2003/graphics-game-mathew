@@ -22,8 +22,8 @@ SecondScene::SecondScene()
 		->setPosition({ -0.4, -2.2, 19.4 })->setScale(Vector3f(0.5, 0.5, 0.5));
 
 
-	gameObjects["goal"] = (new Goal(true))
-		->setPosition({ 0, -2, 0 })->setScale({ 0.2, 0.2, 0.2 });
+	gameObjects["goal"] = (new Goal(false))
+		->setPosition({ 0, -2, 5 })->setScale({ 0.3, 0.3, 0.3 });
 
 	gameObjects["maze"] = (new Maze(false))
 		->setPosition({ -20, -3, 20 });

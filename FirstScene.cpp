@@ -24,7 +24,7 @@ FirstScene::FirstScene()
 
 
 	gameObjects["goal"] = (new Goal(true))
-		->setPosition({ 10.5, -2, 11 })->setScale({0.2, 0.2, 0.2});
+		->setPosition({ 10.5, -2, 11.5 })->setScale({ 0.3, 0.3, 0.3 });
 
 	gameObjects["maze"] = (new Maze(true))
 		->setPosition({ -20, -3, 20 });

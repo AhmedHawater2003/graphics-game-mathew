@@ -9,10 +9,17 @@ Goal::Goal(bool isFirstScene)
 }
 
 void Goal::init() {
-	if (isFirstScene)
-		model_goal.Load("models/Trophy/Trophy star N250516.3DS");
-	else
-		model_goal.Load("models/Trophy/Trophy star N250516.3DS");
+	if (isFirstScene) {
+		model_goal.Load("models/key/key.3ds");
+		model_goal.scale = 70;
+		model_goal.pos = { 0, 2, 0 };
+		model_goal.rot.y = 90;
+	}
+	else {
+		model_goal.Load("models/treasure/treasure.3ds");
+		model_goal.scale = 5;
+		model_goal.pos = { 0, 2, 0 };
+	}
 }
 
 void Goal::draw() {
